@@ -1,4 +1,4 @@
-package com.example.movieplayer
+package com.mayarafernandes.movieplayer
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

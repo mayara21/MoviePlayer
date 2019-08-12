@@ -1,4 +1,4 @@
-package com.example.movieplayer
+package com.mayarafernandes.movieplayer
 
 import org.junit.Test
 
