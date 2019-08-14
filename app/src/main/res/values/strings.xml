@@ -5,4 +5,6 @@
     <string name="entrar">Entrar</string>
     <string name="textview">TextView</string>
     <string name="senha">Senha</string>
+    <string name="movie_player">Movie Player</string>
+    <string name="app_symbol">app_symbol</string>
 </resources>
