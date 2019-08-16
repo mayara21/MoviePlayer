@@ -2,7 +2,6 @@ package com.mayarafernandes.movieplayer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_display_message.*
 
 class DisplayMessage : AppCompatActivity() {
@@ -13,8 +12,9 @@ class DisplayMessage : AppCompatActivity() {
 
         val message = intent.getStringExtra(EXTRA_MESSAGE)
 
-        val textView4 = findViewById<TextView>(R.id.textView4).apply {
-            text = message
-        }
+        //val textView4 = findViewById<TextView>(R.id.textView4).apply {
+        //    text = message
+        //}
+        welcomeMessageText.text = message
     }
 }
