@@ -5,4 +5,6 @@
     <string name="login_button">Entrar</string>
     <string name="textview">TextView</string>
     <string name="password">Senha</string>
+    <string name="preference_file_key">com.mayarafernandes.movieplayer.CREDENTIALS</string>
+    <string name="forget_email">Esquecer e-mail</string>
 </resources>
