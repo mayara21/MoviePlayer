@@ -31,19 +31,27 @@ class MainActivity : AppCompatActivity() {
         val emailBox = emailEditText
         val passwordBox = passwordEditText
 
-        emailBox.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(s: Editable) { loginErrorMessageText.text = "" }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
-
-        passwordBox.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(s: Editable) { loginErrorMessageText.text = "" }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
+        emailBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
+        passwordBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
 
 
+        //emailBox.addTextChangedListener(object: TextWatcher {
+        //    override fun afterTextChanged(s: Editable) { loginErrorMessageText.text = "" }
+        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        //})
+
+        //passwordBox.addTextChangedListener(object: TextWatcher {
+        //    override fun afterTextChanged(s: Editable) { loginErrorMessageText.text = "" }
+        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        //})
+
+
+    }
+
+    private fun removeErrorMessage(b: Boolean) {
+        if(b) loginErrorMessageText.text = ""
     }
 
 
