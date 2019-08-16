@@ -2,7 +2,7 @@
     <string name="app_name">MoviePlayer</string>
     <string name="login">Login</string>
     <string name="e_mail">E-mail</string>
-    <string name="entrar">Entrar</string>
+    <string name="login_button">Entrar</string>
     <string name="textview">TextView</string>
-    <string name="senha">Senha</string>
+    <string name="password">Senha</string>
 </resources>
