@@ -7,4 +7,6 @@
     <string name="password">Senha</string>
     <string name="preference_file_key">com.mayarafernandes.movieplayer.CREDENTIALS</string>
     <string name="forget_email">Esquecer e-mail</string>
+    <string name="movie_player">Movie Player</string>
+    <string name="app_symbol">app_symbol</string>
 </resources>

@@ -15,9 +15,8 @@ class DisplayMessage : AppCompatActivity() {
 
         val message = intent.getStringExtra(EXTRA_MESSAGE)
 
-        val textView4 = findViewById<TextView>(R.id.textView4).apply {
-            text = message
-        }
+
+        welcomeMessageText.text = message
     }
 
     fun onClickForget(view: View) {

@@ -9,7 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_login.*
 
 const val EXTRA_MESSAGE = "com.mayarafernandes.movieplayer.MESSAGE"
 const val LOGIN_ERROR_MESSAGE = "E-mail ou senha incorretos"
@@ -17,11 +17,11 @@ const val MASTER_EMAIL = "admin@mail.com"
 const val MASTER_PASSWORD = "admin123"
 
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         val sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
         val savedEmail = sharedPref.getString("savedEmail", null)
@@ -34,18 +34,6 @@ class MainActivity : AppCompatActivity() {
         emailBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
         passwordBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
 
-
-        //emailBox.addTextChangedListener(object: TextWatcher {
-        //    override fun afterTextChanged(s: Editable) { loginErrorMessageText.text = "" }
-        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        //})
-
-        //passwordBox.addTextChangedListener(object: TextWatcher {
-        //    override fun afterTextChanged(s: Editable) { loginErrorMessageText.text = "" }
-        //    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        //    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        //})
 
 
     }
