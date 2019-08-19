@@ -34,8 +34,6 @@ class LoginActivity : AppCompatActivity() {
         emailBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
         passwordBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
 
-
-
     }
 
     private fun removeErrorMessage(b: Boolean) {
@@ -45,10 +43,6 @@ class LoginActivity : AppCompatActivity() {
 
     fun onLogin(view: View) {
 
-        //val email = findViewById<EditText>(R.id.emailEditText).text.toString()
-        //val password = findViewById<EditText>(R.id.passwordEditText).text.toString()
-
-
         val email = emailEditText.text.toString()
         val password = passwordEditText.text.toString()
 
@@ -57,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
             with (sharedPref.edit()) {
                 putString("savedEmail", email)
                 apply()
-                //commit()
             }
 
             val message = "$email logado.\nSeja bem vindo!"
@@ -67,6 +60,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             startActivity(intent)
+
+            finish()
         }
 
         else {
