@@ -1,7 +1,7 @@
 package com.mayarafernandes.movieplayer.splash
 
 import android.content.Intent
-import com.mayarafernandes.movieplayer.LoginActivity
+import com.mayarafernandes.movieplayer.login.LoginActivity
 
 class SplashNavigator (private val activity: SplashActivity){
 
