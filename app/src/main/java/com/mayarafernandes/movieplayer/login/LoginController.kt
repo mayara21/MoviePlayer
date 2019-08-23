@@ -1,5 +1,7 @@
 package com.mayarafernandes.movieplayer.login
 
+import com.mayarafernandes.movieplayer.login.view.LoginView
+
 class LoginController (private val view: LoginView, private val savedEmail: SavedEmail, private val navigator: LoginNavigator) {
 
     fun onViewCreated() {

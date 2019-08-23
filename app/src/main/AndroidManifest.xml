@@ -19,13 +19,13 @@
 
         <activity
                 android:name=".DisplayMessage"
-                android:parentActivityName=".login.LoginActivity">
+                android:parentActivityName=".login.view.LoginActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".login.LoginActivity"/>
+                    android:value=".login.view.LoginActivity"/>
         </activity>
 
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".login.view.LoginActivity">
         </activity>
     </application>
 

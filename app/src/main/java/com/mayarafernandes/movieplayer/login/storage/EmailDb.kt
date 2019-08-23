@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.login
+package com.mayarafernandes.movieplayer.login.storage
 
 interface EmailDb {
     fun getEmail(): String?

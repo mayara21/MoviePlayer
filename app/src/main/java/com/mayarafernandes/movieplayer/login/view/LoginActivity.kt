@@ -1,10 +1,14 @@
-package com.mayarafernandes.movieplayer.login
+package com.mayarafernandes.movieplayer.login.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.login.LoginController
+import com.mayarafernandes.movieplayer.login.LoginNavigator
+import com.mayarafernandes.movieplayer.login.SavedEmail
+import com.mayarafernandes.movieplayer.login.storage.SharedPrefAccess
 import kotlinx.android.synthetic.main.activity_login.*
 
 

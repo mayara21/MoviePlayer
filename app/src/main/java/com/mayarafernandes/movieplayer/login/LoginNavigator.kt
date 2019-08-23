@@ -2,6 +2,7 @@ package com.mayarafernandes.movieplayer.login
 
 import android.content.Intent
 import com.mayarafernandes.movieplayer.DisplayMessage
+import com.mayarafernandes.movieplayer.login.view.LoginActivity
 
 class LoginNavigator(private val activity: LoginActivity) {
 

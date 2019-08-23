@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.login
+package com.mayarafernandes.movieplayer.login.storage
 
 import android.content.Context
 import com.mayarafernandes.movieplayer.R
