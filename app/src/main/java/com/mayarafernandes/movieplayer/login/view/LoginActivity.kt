@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.login.Login
 import com.mayarafernandes.movieplayer.login.LoginController
 import com.mayarafernandes.movieplayer.login.LoginNavigator
 import com.mayarafernandes.movieplayer.login.SavedEmail
@@ -23,8 +24,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
         val sharedPrefAccess = SharedPrefAccess(this)
         val savedEmail = SavedEmail(sharedPrefAccess)
         val navigator = LoginNavigator(this)
+        val login = Login(savedEmail)
 
-        controller = LoginController(this, savedEmail, navigator)
+        controller = LoginController(this, savedEmail, navigator, login)
 
         controller.onViewCreated()
 
