@@ -9,19 +9,18 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity(), LoginView {
-    override fun setEmailEditText(savedEmail: String) {
-        emailEditText.setText(savedEmail, TextView.BufferType.EDITABLE)
-    }
 
-    override fun showloginErrorMessageText(loginErrorMessage: String) {
-        loginErrorMessageText.text = loginErrorMessage
-    }
-
-    private val controller = LoginController(this)
+    private lateinit var controller: LoginController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val sharedPrefAccess = SharedPrefAccess(this)
+        val savedEmail = SavedEmail(sharedPrefAccess)
+        val navigator = LoginNavigator(this)
+
+        controller = LoginController(this, savedEmail, navigator)
 
         controller.onViewCreated()
 
@@ -32,12 +31,19 @@ class LoginActivity : AppCompatActivity(), LoginView {
         passwordBox.setOnFocusChangeListener { view, b -> removeErrorMessage(b) }
     }
 
+    override fun setEmailEditText(savedEmail: String?) {
+        emailEditText.setText(savedEmail, TextView.BufferType.EDITABLE)
+    }
+
+    override fun showLoginErrorMessageText(loginErrorMessage: String) {
+        loginErrorMessageText.text = loginErrorMessage
+    }
+
     private fun removeErrorMessage(b: Boolean) {
         if(b) loginErrorMessageText.text = ""
     }
 
     fun onLogin(view: View) {
-
         val email = emailEditText.text.toString()
         val password = passwordEditText.text.toString()
 

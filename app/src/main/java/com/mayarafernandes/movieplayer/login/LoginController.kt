@@ -1,17 +1,8 @@
 package com.mayarafernandes.movieplayer.login
 
-import android.content.Context
-import android.content.Intent
-import com.mayarafernandes.movieplayer.DisplayMessage
-import com.mayarafernandes.movieplayer.R
-
-
-class LoginController (private val view: LoginView, private val savedEmail: SavedEmail) {
+class LoginController (private val view: LoginView, private val savedEmail: SavedEmail, private val navigator: LoginNavigator) {
 
     fun onViewCreated() {
-
-
-
         val email = savedEmail.showSavedEmail()
 
         view.setEmailEditText(email)
@@ -20,25 +11,15 @@ class LoginController (private val view: LoginView, private val savedEmail: Save
     fun onLoginDo(email: String, password: String) {
 
         if(email == MASTER_EMAIL && password == MASTER_PASSWORD) {
-            val sharedPref = view.getSharedPreferences(activity.getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
-            with (sharedPref.edit()) {
-                putString("savedEmail", email)
-                apply()
-            }
+            val loginMessage = "$email logado.\nSeja bem vindo!"
 
-            val message = "$email logado.\nSeja bem vindo!"
-
-            val intent = Intent(activity, DisplayMessage::class.java). apply {
-                putExtra(EXTRA_MESSAGE, message)
-            }
-
-            view.startActivity(intent)
-
+            savedEmail.save(email)
+            navigator.goToMainScreen(loginMessage)
             view.finish()
         }
 
         else {
-            view.showloginErrorMessageText(LOGIN_ERROR_MESSAGE)
+            view.showLoginErrorMessageText(LOGIN_ERROR_MESSAGE)
         }
     }
 
