@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.mayarafernandes.movieplayer">
+        package="com.mayarafernandes.movieplayer">
 
     <application
             android:allowBackup="true"
@@ -9,24 +9,23 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-        <activity
-                android:name=".DisplayMessage"
-                android:parentActivityName=".login.view.LoginActivity">
+        <activity android:name=".movieList.view.MovieListActivity"
+                  android:parentActivityName=".login.view.LoginActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".login.view.LoginActivity"/>
+                    android:value=".login.view.LoginActivity" />
         </activity>
+        <activity android:name=".splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".login.view.LoginActivity">
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+                android:name=".DisplayMessage">
+        </activity>
+        <activity android:name=".login.view.LoginActivity" />
     </application>
 
 </manifest>
