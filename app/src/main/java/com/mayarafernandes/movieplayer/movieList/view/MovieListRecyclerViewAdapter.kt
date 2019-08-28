@@ -8,11 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mayarafernandes.movieplayer.MovieDb
+import com.mayarafernandes.movieplayer.movieList.ItemMovie
 import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.movieList.MovieListPresenter
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
 
-class MovieListRecyclerViewAdapter(private val context: Context, private val db: MovieDb): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+
+    var movieList: List<MovieViewModel> = emptyList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,21 +26,21 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val db:
     }
 
     override fun getItemCount(): Int {
-        return db.getSize()
+        return movieList.size
     }
 
     override fun onBindViewHolder(
         holder: MyViewHolder,
         position: Int
     ) {
-        holder.title.text = db.getMovieTitle(position)
-        holder.description.text = db.getMovieDescription(position)
-        val url = db.getMovieImageUrl(position)
 
-        //holder.title.text = movieList[position].title
-        //holder.description.text = movieList[position].description
+        holder.title.text = movieList[position].title
+        holder.description.text = movieList[position].description
+
+        val url = movieList[position].urlImage
         Glide.with(context)
              .load(url)
+             .circleCrop()
              .into(holder.imageView)
     }
 
