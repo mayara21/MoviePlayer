@@ -15,6 +15,5 @@ class MovieListController(
         }
 
         view.setViewModel(viewModels)
-
     }
 }

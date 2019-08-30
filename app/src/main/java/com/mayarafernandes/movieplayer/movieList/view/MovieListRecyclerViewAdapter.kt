@@ -12,6 +12,7 @@ import com.mayarafernandes.movieplayer.movieList.ItemMovie
 import com.mayarafernandes.movieplayer.R
 import com.mayarafernandes.movieplayer.movieList.MovieListPresenter
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
+import retrofit2.http.GET
 
 class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 

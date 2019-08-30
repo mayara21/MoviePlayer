@@ -20,7 +20,6 @@ class DisplayMessage : AppCompatActivity() {
         with (sharedPref.edit()) {
             remove("savedEmail")
             apply()
-            //commit()
         }
     }
 

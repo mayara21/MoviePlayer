@@ -86,5 +86,4 @@ object Supplier {
             "https://cdn1.thr.com/sites/default/files/imagecache/portrait_300x450/2010/10/the_social_network_poster_a.jpg"
         )
     )
-
 }

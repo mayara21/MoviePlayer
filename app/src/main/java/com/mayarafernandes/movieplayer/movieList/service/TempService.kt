@@ -6,5 +6,4 @@ class TempService : MovieService {
     private val movieList = Supplier.movies
 
     override fun returnMovieList() = movieList
-
 }
