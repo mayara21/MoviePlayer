@@ -4,14 +4,9 @@ import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
 
 class MovieListPresenter {
 
-    fun convertModel(movie: Movie): MovieViewModel {
-
-        val viewModelItem = MovieViewModel()
-
-        viewModelItem.title = movie.title
-        viewModelItem.description = movie.description
-        viewModelItem.urlImage = movie.urlImage
-
-        return viewModelItem
-    }
+    fun convertModel(movie: Movie) = MovieViewModel(
+        movie.title,
+        movie.description,
+        movie.urlImage,
+        movie.id)
 }

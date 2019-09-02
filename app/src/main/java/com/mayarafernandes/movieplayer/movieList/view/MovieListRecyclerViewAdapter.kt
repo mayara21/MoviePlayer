@@ -9,10 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mayarafernandes.movieplayer.R
-import com.mayarafernandes.movieplayer.movieList.OnClickMovieListener
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
 
-class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 
     var movieList: List<MovieViewModel> = emptyList()
 
@@ -32,17 +31,20 @@ class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.A
         holder: MyViewHolder,
         position: Int
     ) {
+        val movie = movieList[position]
 
-        holder.title.text = movieList[position].title
-        holder.description.text = movieList[position].description
+        holder.title.text = movie.title
+        holder.description.text = movie.description
 
-        val url = movieList[position].urlImage
+        val url = movie.urlImage
         Glide.with(context)
              .load(url)
              .circleCrop()
              .into(holder.imageView)
 
-        holder.itemView.setOnClickListener(OnClickMovieListener(position))
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(movie)
+        }
     }
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
