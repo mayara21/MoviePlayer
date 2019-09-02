@@ -1,11 +1,11 @@
 package com.mayarafernandes.movieplayer
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.mayarafernandes.movieplayer.login.LoginController.Companion.EXTRA_MESSAGE
-import kotlinx.android.synthetic.main.activity_display_message.*
+import com.mayarafernandes.movieplayer.movieList.view.MovieListActivity
 
 class DisplayMessage : AppCompatActivity() {
 
@@ -13,10 +13,6 @@ class DisplayMessage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_message)
 
-        val message = intent.getStringExtra(EXTRA_MESSAGE)
-
-
-        welcomeMessageText.text = message
     }
 
     fun onClickForget(view: View) {
@@ -26,6 +22,10 @@ class DisplayMessage : AppCompatActivity() {
             apply()
             //commit()
         }
+    }
 
+    fun goToList(view: View) {
+        val listScreenIntent = Intent(this, MovieListActivity::class.java)
+        startActivity(listScreenIntent)
     }
 }

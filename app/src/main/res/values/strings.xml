@@ -9,4 +9,8 @@
     <string name="forget_email">Esquecer e-mail</string>
     <string name="movie_player">Movie Player</string>
     <string name="app_symbol">app_symbol</string>
+    <string name="welcome_text">welcomeText</string>
+    <string name="movieTitle">movieTitle</string>
+    <string name="movieDescription">movieDescription</string>
+    <string name="todo">TODO</string>
 </resources>

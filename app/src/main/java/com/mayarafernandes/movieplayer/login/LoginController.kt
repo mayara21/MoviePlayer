@@ -12,9 +12,7 @@ class LoginController (private val view: LoginView, private val savedEmail: Save
 
     fun onLoginDo(email: String, password: String) {
         if(login.doLogin(email, password)) {
-            val loginMessage = "$email logado.\nSeja bem vindo!"
-
-            navigator.goToMainScreen(loginMessage)
+            navigator.goToMainScreen()
             view.finish()
         }
 
@@ -24,7 +22,6 @@ class LoginController (private val view: LoginView, private val savedEmail: Save
     }
 
     companion object {
-        const val EXTRA_MESSAGE = "com.mayarafernandes.movieplayer.MESSAGE"
         const val LOGIN_ERROR_MESSAGE = "E-mail ou senha incorretos"
     }
 }
