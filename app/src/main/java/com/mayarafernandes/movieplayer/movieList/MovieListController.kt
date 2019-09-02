@@ -1,5 +1,7 @@
 package com.mayarafernandes.movieplayer.movieList
 
+import com.mayarafernandes.movieplayer.movieList.view.MovieListPresenter
+import com.mayarafernandes.movieplayer.movieList.view.MovieListView
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
 
 class MovieListController(
