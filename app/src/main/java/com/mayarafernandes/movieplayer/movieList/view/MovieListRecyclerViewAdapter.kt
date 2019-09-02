@@ -8,11 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mayarafernandes.movieplayer.movieList.ItemMovie
 import com.mayarafernandes.movieplayer.R
-import com.mayarafernandes.movieplayer.movieList.MovieListPresenter
+import com.mayarafernandes.movieplayer.movieList.OnClickMovieListener
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
-import retrofit2.http.GET
 
 class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 
@@ -43,6 +41,8 @@ class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.A
              .load(url)
              .circleCrop()
              .into(holder.imageView)
+
+        holder.itemView.setOnClickListener(OnClickMovieListener(position))
     }
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
