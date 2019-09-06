@@ -4,17 +4,29 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".movieList.view.MovieListActivity"
-        android:padding="16dp"
-        android:clipToPadding="false">
+        tools:context=".movieList.view.MovieListActivity">
+
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movieListRecyclerView"
+            android:padding="16dp"
+            android:clipToPadding="false"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+            android:id="@+id/movieListLoadingProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/movieListRecyclerView"
+            app:layout_constraintStart_toStartOf="@+id/movieListRecyclerView"
+            app:layout_constraintTop_toTopOf="@+id/movieListRecyclerView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

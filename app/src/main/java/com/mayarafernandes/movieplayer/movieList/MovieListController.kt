@@ -13,6 +13,7 @@ class MovieListController(
 ) {
 
     fun onViewCreated() {
+        view.showProgressBar(true)
         movieRepository.returnMovieList(object: MovieCallbacks {
             override fun onSuccess(movieList: List<Movie>) {
                 val viewModels = movieList.map { movie ->
@@ -20,6 +21,8 @@ class MovieListController(
                 }
 
                 view.setViewModel(viewModels)
+
+                view.showProgressBar(false)
             }
 
             override fun onError() { Log.d("movieListController", "Deu erro") }

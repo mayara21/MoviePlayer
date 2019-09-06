@@ -15,7 +15,6 @@ class MovieRepository (private val localMovieStorage: LocalMovieStorage) {
             }
 
             override fun onError() { movieCallbacks.onError() }
-
         })
     }
 

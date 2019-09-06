@@ -57,5 +57,4 @@ class MovieServiceIMPL() {
         movie.images,
         movie.categories,
         movie.id)
-
 }

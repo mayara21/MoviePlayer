@@ -1,7 +1,6 @@
-package com.mayarafernandes.movieplayer.movieList
+package com.mayarafernandes.movieplayer.movieList.repository.service
 
 import com.google.gson.Gson
-import com.mayarafernandes.movieplayer.movieList.service.MovieService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

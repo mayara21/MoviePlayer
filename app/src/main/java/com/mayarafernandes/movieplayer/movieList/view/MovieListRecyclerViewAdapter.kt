@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mayarafernandes.movieplayer.R
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
 
-class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val progressBar: ProgressBar): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 
     private var movieList = mutableListOf<MovieViewModel>()
 
@@ -31,9 +32,6 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         holder: MyViewHolder,
         position: Int
     ) {
-        val teste = movieList[1].title
-        println("Adapter. Title is $teste")
-
         val movie = movieList[position]
 
         holder.title.text = movie.title
@@ -48,6 +46,8 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         holder.itemView.setOnClickListener {
             clickListener.onClick(movie)
         }
+
+        //progressBar.visibility = View.GONE
     }
 
     fun updateMovieList(movies: List<MovieViewModel>)  {
