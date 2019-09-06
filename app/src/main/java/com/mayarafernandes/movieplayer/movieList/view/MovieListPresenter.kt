@@ -7,6 +7,6 @@ class MovieListPresenter {
     fun convertModel(movie: Movie) = MovieViewModel(
         movie.title,
         movie.description,
-        movie.urlImage,
+        movie.images.find { it.type == "cover" }!!.url,
         movie.id)
 }

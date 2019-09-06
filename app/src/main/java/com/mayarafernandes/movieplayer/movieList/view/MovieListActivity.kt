@@ -36,7 +36,7 @@ class MovieListActivity : AppCompatActivity(),
 
     override fun setViewModel(viewModels: List<MovieViewModel>) {
         val rvAdapter = movieListRecyclerView.adapter as MovieListRecyclerViewAdapter
-        rvAdapter.movieList = viewModels
+        rvAdapter.updateMovieList(viewModels)
     }
 
     override fun onClick(movie: MovieViewModel) {

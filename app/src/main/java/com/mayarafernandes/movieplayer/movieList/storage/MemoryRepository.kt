@@ -14,7 +14,7 @@ class MemoryRepository: LocalMovieStorage {
         return movieList
     }
 
-    override fun getMovieById(movieId: Int): Movie {
+    override fun getMovieById(movieId: String): Movie {
         return movieList.find { it.id == movieId }!!
     }
 }

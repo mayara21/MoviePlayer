@@ -1,8 +1,19 @@
 package com.mayarafernandes.movieplayer.movieList
 
-data class Movie(var title: String, var description: String, var urlImage: String, var id: Int)
+data class Movie(val title: String,
+                 val description: String,
+                 val type: String,
+                 val publishedDate: Double,
+                 val availableDate: Double,
+                 val metadata: List<MovieMetadata>,
+                 val contents: List<Content>,
+                 val credits: List<Credit>,
+                 val parentalRatings: List<ParentalRating>,
+                 val images: List<Image>,
+                 val categories: List<Category>,
+                 val id: String)
 
-object Supplier {
+/* object Supplier {
 
     val movies = listOf<Movie>(
         Movie(
@@ -103,3 +114,4 @@ object Supplier {
         )
     )
 }
+*/

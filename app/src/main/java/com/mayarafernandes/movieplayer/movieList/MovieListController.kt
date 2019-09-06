@@ -1,5 +1,7 @@
 package com.mayarafernandes.movieplayer.movieList
 
+import android.util.Log
+import com.mayarafernandes.movieplayer.movieList.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.movieList.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.movieList.view.MovieListView
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
@@ -11,12 +13,17 @@ class MovieListController(
 ) {
 
     fun onViewCreated() {
-        val movieList = movieRepository.returnMovieList()
-        val viewModels = movieList.map { movie ->
-            presenter.convertModel(movie)
-        }
+        movieRepository.returnMovieList(object: MovieCallbacks {
+            override fun onSuccess(movieList: List<Movie>) {
+                val viewModels = movieList.map { movie ->
+                    presenter.convertModel(movie)
+                }
 
-        view.setViewModel(viewModels)
+                view.setViewModel(viewModels)
+            }
+
+            override fun onError() { Log.d("movieListController", "Deu erro") }
+        })
     }
 
     fun onSelectMovie(movie: MovieViewModel) {
