@@ -1,9 +1,8 @@
-package com.mayarafernandes.movieplayer.movieList.service
+package com.mayarafernandes.movieplayer.movieList.repository.service
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.mayarafernandes.movieplayer.movieList.Movie
-import com.mayarafernandes.movieplayer.movieList.RetrofitConfig
+import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +18,10 @@ class MovieServiceIMPL() {
             .setLenient()
             .create()
 
-        val movieService = RetrofitConfig(apiEndpoint, gson).buildService(MovieService::class.java)
+        val movieService = RetrofitConfig(
+            apiEndpoint,
+            gson
+        ).buildService(MovieService::class.java)
         val requestCall: Call<List<MovieDTO>> = movieService.returnMovieList()
 
         requestCall.enqueue(object: Callback<List<MovieDTO>> {
@@ -44,17 +46,19 @@ class MovieServiceIMPL() {
         })
     }
 
-    private fun convertDTOToMovieModel(movie: MovieDTO) = Movie(
-        movie.title,
-        movie.description,
-        movie.type,
-        movie.publishedDate,
-        movie.availableDate,
-        movie.metadata,
-        movie.contents,
-        movie.credits,
-        movie.parentalRatings,
-        movie.images,
-        movie.categories,
-        movie.id)
+    private fun convertDTOToMovieModel(movie: MovieDTO) =
+        Movie(
+            movie.title,
+            movie.description,
+            movie.type,
+            movie.publishedDate,
+            movie.availableDate,
+            movie.metadata,
+            movie.contents,
+            movie.credits,
+            movie.parentalRatings,
+            movie.images,
+            movie.categories,
+            movie.id
+        )
 }

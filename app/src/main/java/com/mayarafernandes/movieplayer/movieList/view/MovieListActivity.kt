@@ -7,8 +7,8 @@ import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mayarafernandes.movieplayer.R
 import com.mayarafernandes.movieplayer.movieList.*
-import com.mayarafernandes.movieplayer.movieList.MovieRepository
-import com.mayarafernandes.movieplayer.movieList.storage.MemoryRepository
+import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
+import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryRepository
 import kotlinx.android.synthetic.main.activity_movie_list.*
 
 class MovieListActivity : AppCompatActivity(),

@@ -1,8 +1,8 @@
-package com.mayarafernandes.movieplayer.movieList
+package com.mayarafernandes.movieplayer.movieList.repository
 
-import com.mayarafernandes.movieplayer.movieList.service.MovieCallbacks
-import com.mayarafernandes.movieplayer.movieList.service.MovieServiceIMPL
-import com.mayarafernandes.movieplayer.movieList.storage.LocalMovieStorage
+import com.mayarafernandes.movieplayer.movieList.repository.service.MovieCallbacks
+import com.mayarafernandes.movieplayer.movieList.repository.service.MovieServiceIMPL
+import com.mayarafernandes.movieplayer.movieList.repository.storage.LocalMovieStorage
 
 class MovieRepository (private val localMovieStorage: LocalMovieStorage) {
     private val movieService = MovieServiceIMPL()

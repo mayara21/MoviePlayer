@@ -1,7 +1,9 @@
 package com.mayarafernandes.movieplayer.movieList
 
 import android.util.Log
-import com.mayarafernandes.movieplayer.movieList.service.MovieCallbacks
+import com.mayarafernandes.movieplayer.movieList.repository.Movie
+import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
+import com.mayarafernandes.movieplayer.movieList.repository.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.movieList.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.movieList.view.MovieListView
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel

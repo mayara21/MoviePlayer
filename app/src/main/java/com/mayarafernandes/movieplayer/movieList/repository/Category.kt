@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.movieList
+package com.mayarafernandes.movieplayer.movieList.repository
 
 data class Category(val title: String,
                     val description: String,

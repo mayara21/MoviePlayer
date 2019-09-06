@@ -1,6 +1,6 @@
 package com.mayarafernandes.movieplayer.movieList.view
 
-import com.mayarafernandes.movieplayer.movieList.Movie
+import com.mayarafernandes.movieplayer.movieList.repository.Movie
 
 class MovieListPresenter {
 

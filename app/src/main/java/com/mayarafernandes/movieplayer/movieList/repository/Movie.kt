@@ -1,6 +1,4 @@
-package com.mayarafernandes.movieplayer.movieList
-
-import com.mayarafernandes.movieplayer.movieList.repository.*
+package com.mayarafernandes.movieplayer.movieList.repository
 
 data class Movie(val title: String,
                  val description: String,

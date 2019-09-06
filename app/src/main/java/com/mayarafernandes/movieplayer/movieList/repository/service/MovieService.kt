@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.movieList.service
+package com.mayarafernandes.movieplayer.movieList.repository.service
 
 import retrofit2.Call
 import retrofit2.http.GET

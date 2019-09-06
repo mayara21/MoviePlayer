@@ -1,6 +1,6 @@
-package com.mayarafernandes.movieplayer.movieList.storage
+package com.mayarafernandes.movieplayer.movieList.repository.storage
 
-import com.mayarafernandes.movieplayer.movieList.Movie
+import com.mayarafernandes.movieplayer.movieList.repository.Movie
 
 interface LocalMovieStorage {
 

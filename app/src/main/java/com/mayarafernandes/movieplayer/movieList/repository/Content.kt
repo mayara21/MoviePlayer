@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.movieList
+package com.mayarafernandes.movieplayer.movieList.repository
 
 data class Content(val url: String,
                    val format: String,

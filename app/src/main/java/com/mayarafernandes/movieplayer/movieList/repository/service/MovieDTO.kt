@@ -1,6 +1,6 @@
-package com.mayarafernandes.movieplayer.movieList.service
+package com.mayarafernandes.movieplayer.movieList.repository.service
 
-import com.mayarafernandes.movieplayer.movieList.*
+import com.mayarafernandes.movieplayer.movieList.repository.*
 
 data class MovieDTO(val title: String,
                     val description: String,
