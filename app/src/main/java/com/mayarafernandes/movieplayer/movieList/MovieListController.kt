@@ -1,6 +1,5 @@
 package com.mayarafernandes.movieplayer.movieList
 
-import android.util.Log
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
 import com.mayarafernandes.movieplayer.movieList.repository.service.MovieCallbacks
@@ -23,11 +22,13 @@ class MovieListController(
                 }
 
                 view.setViewModel(viewModels)
-
                 view.showProgressBar(false)
             }
 
-            override fun onError() { Log.d("movieListController", "Deu erro") }
+            override fun onError() {
+                view.showProgressBar(false)
+                view.showMovieList(false)
+            }
         })
     }
 
@@ -35,4 +36,5 @@ class MovieListController(
         val movieId = movie.id
         val selectedMovie = movieRepository.onMovieSelected(movieId)
     }
+
 }

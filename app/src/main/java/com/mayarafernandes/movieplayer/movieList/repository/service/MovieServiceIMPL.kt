@@ -7,7 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieServiceIMPL() {
+class MovieServiceIMPL {
     private val apiEndpoint = "https://private-62c15f-movies295.apiary-mock.com/"
 
     fun returnMovieList(movieServiceCallback: MovieCallbacks) {

@@ -21,6 +21,7 @@ class MovieListActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_list)
 
+        noConnectionText.visibility = View.INVISIBLE
         progressBar = findViewById(R.id.movieListLoadingProgressBar)
 
         val memoryRepository = MemoryRepository()
@@ -51,5 +52,17 @@ class MovieListActivity : AppCompatActivity(),
     override fun showProgressBar(show: Boolean) {
         if(show) progressBar.visibility = View.VISIBLE
         else progressBar.visibility = View.GONE
+    }
+
+    override fun showMovieList(show: Boolean) {
+        if(show) {
+            movieListRecyclerView.visibility = View.VISIBLE
+            noConnectionText.visibility = View.INVISIBLE
+        }
+
+        else {
+            movieListRecyclerView.visibility = View.INVISIBLE
+            noConnectionText.visibility = View.VISIBLE
+        }
     }
 }

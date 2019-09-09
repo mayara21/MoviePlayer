@@ -13,4 +13,5 @@
     <string name="movieTitle">movieTitle</string>
     <string name="movieDescription">movieDescription</string>
     <string name="todo">TODO</string>
+    <string name="no_connection">Erro ao carregar a lista</string>
 </resources>
