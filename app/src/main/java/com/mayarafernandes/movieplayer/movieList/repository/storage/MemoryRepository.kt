@@ -1,6 +1,6 @@
-package com.mayarafernandes.movieplayer.movieList.storage
+package com.mayarafernandes.movieplayer.movieList.repository.storage
 
-import com.mayarafernandes.movieplayer.movieList.Movie
+import com.mayarafernandes.movieplayer.movieList.repository.Movie
 
 class MemoryRepository: LocalMovieStorage {
 
@@ -14,7 +14,7 @@ class MemoryRepository: LocalMovieStorage {
         return movieList
     }
 
-    override fun getMovieById(movieId: Int): Movie {
+    override fun getMovieById(movieId: String): Movie {
         return movieList.find { it.id == movieId }!!
     }
 }

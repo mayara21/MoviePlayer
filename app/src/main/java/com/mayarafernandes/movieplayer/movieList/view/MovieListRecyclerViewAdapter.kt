@@ -5,15 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mayarafernandes.movieplayer.R
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
 
-class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val progressBar: ProgressBar): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 
-    var movieList: List<MovieViewModel> = emptyList()
+    private var movieList = mutableListOf<MovieViewModel>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -45,6 +46,11 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         holder.itemView.setOnClickListener {
             clickListener.onClick(movie)
         }
+    }
+
+    fun updateMovieList(movies: List<MovieViewModel>)  {
+        movieList.addAll(movies)
+        notifyDataSetChanged()
     }
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
