@@ -46,8 +46,6 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         holder.itemView.setOnClickListener {
             clickListener.onClick(movie)
         }
-
-        //progressBar.visibility = View.GONE
     }
 
     fun updateMovieList(movies: List<MovieViewModel>)  {
