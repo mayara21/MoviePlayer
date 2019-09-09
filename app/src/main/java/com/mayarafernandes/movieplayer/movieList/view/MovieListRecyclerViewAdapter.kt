@@ -4,12 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.mayarafernandes.movieplayer.movieList.ItemMovie
 import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.movieList.MovieListPresenter
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
+import retrofit2.http.GET
 
-class MovieListRecyclerViewAdapter(private val context: Context, private val movieList: List<MovieModel>): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+
+    var movieList: List<MovieViewModel> = emptyList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,12 +34,20 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val mov
         holder: MyViewHolder,
         position: Int
     ) {
+
         holder.title.text = movieList[position].title
         holder.description.text = movieList[position].description
+
+        val url = movieList[position].urlImage
+        Glide.with(context)
+             .load(url)
+             .circleCrop()
+             .into(holder.imageView)
     }
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.movieTitleTextView
         val description: TextView = itemView.movieDescriptionTextView
+        val imageView: ImageView = itemView.movieIconImageView
     }
 }
