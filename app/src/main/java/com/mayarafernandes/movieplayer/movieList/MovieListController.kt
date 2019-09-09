@@ -1,19 +1,26 @@
 package com.mayarafernandes.movieplayer.movieList
 
-import android.view.View
+import com.mayarafernandes.movieplayer.movieList.view.MovieListPresenter
+import com.mayarafernandes.movieplayer.movieList.view.MovieListView
+import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
 
 class MovieListController(
-    private val itemMovie: ItemMovie,
+    private val movieRepository: MovieRepository,
     private val presenter: MovieListPresenter,
     private val view: MovieListView
 ) {
 
     fun onViewCreated() {
-        val movieList = itemMovie.returnMovieList()
+        val movieList = movieRepository.returnMovieList()
         val viewModels = movieList.map { movie ->
             presenter.convertModel(movie)
         }
 
         view.setViewModel(viewModels)
+    }
+
+    fun onSelectMovie(movie: MovieViewModel) {
+        val movieId = movie.id
+        val selectedMovie = movieRepository.onMovieSelected(movieId)
     }
 }
