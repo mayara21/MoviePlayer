@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mayarafernandes.movieplayer.R
 import com.mayarafernandes.movieplayer.movieList.*
@@ -12,7 +13,7 @@ import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryReposi
 import kotlinx.android.synthetic.main.activity_movie_list.*
 
 class MovieListActivity : AppCompatActivity(),
-    MovieListView, MovieViewModelClickListener {
+    MovieListView, MovieViewModelClickListener, FavoriteButtonCheckListener {
 
     private lateinit var controller: MovieListController
     private lateinit var progressBar: ProgressBar
@@ -34,7 +35,7 @@ class MovieListActivity : AppCompatActivity(),
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         movieListRecyclerView.layoutManager = layoutManager
 
-        val rvAdapter = MovieListRecyclerViewAdapter(this, this, progressBar)
+        val rvAdapter = MovieListRecyclerViewAdapter(this, this, this)
         movieListRecyclerView.adapter = rvAdapter
 
         controller.onViewCreated()
@@ -64,5 +65,12 @@ class MovieListActivity : AppCompatActivity(),
             movieListRecyclerView.visibility = View.INVISIBLE
             noConnectionText.visibility = View.VISIBLE
         }
+    }
+
+    override fun onCheckedChange(
+        movie: MovieViewModel,
+        favoriteButton: ToggleButton
+    ) {
+        controller.onFavorited(movie, favoriteButton)
     }
 }

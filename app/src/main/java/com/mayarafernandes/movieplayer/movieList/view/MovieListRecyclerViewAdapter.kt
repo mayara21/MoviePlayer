@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mayarafernandes.movieplayer.R
 import kotlinx.android.synthetic.main.adapter_movie_item.view.*
 
-class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val progressBar: ProgressBar): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val checkListener: FavoriteButtonCheckListener): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 
     private var movieList = mutableListOf<MovieViewModel>()
 
@@ -45,6 +44,13 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
 
         holder.itemView.setOnClickListener {
             clickListener.onClick(movie)
+        }
+
+        var favoriteButton = holder.itemView.button_favorite
+        favoriteButton.isChecked = movie.favorite
+
+        favoriteButton.setOnClickListener {
+            checkListener.onCheckedChange(movie, favoriteButton)
         }
     }
 
