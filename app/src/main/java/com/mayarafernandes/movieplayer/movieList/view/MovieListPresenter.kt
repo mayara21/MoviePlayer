@@ -13,17 +13,17 @@ class MovieListPresenter {
         movie.description,
         movie.images.find { it.type == "cover" }!!.url,
         movie.id,
-        movie.favorite)
+        false)
 
     fun setFavorite(favoriteButton: ToggleButton) {
         favoriteButton.startAnimation(setButtonFavoriteAnimation())
     }
 
     private fun setButtonFavoriteAnimation(): ScaleAnimation {
-        var scaleAnimation = ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f)
-        scaleAnimation.setDuration(500)
-        var bounceInterpolator = BounceInterpolator()
-        scaleAnimation.setInterpolator(bounceInterpolator)
+        val scaleAnimation = ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF, 0.7f, Animation.RELATIVE_TO_SELF, 0.7f)
+        scaleAnimation.duration = 500
+        val bounceInterpolator = BounceInterpolator()
+        scaleAnimation.interpolator = bounceInterpolator
 
         return scaleAnimation
     }
