@@ -14,4 +14,9 @@
     <string name="movieDescription">movieDescription</string>
     <string name="todo">TODO</string>
     <string name="no_connection">Erro ao carregar a lista</string>
+    <string name="favorite_menu_name">Favoritos</string>
+    <string name="movie_menu_name">Filmes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
