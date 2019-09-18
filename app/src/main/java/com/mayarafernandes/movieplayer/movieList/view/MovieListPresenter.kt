@@ -15,7 +15,7 @@ class MovieListPresenter {
         movie.id,
         false)
 
-    fun setFavorite(favoriteButton: ToggleButton) {
+    fun setFavoriteButton(favoriteButton: ToggleButton) {
         favoriteButton.startAnimation(setButtonFavoriteAnimation())
     }
 

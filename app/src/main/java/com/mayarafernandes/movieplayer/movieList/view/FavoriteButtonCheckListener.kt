@@ -7,4 +7,9 @@ interface FavoriteButtonCheckListener {
         movie: MovieViewModel,
         favoriteButton: ToggleButton
     )
+
+    fun onUncheckedChange(
+        movie: MovieViewModel,
+        favoriteButton: ToggleButton
+    )
 }

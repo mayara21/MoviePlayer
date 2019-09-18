@@ -1,5 +1,6 @@
 package com.mayarafernandes.movieplayer.favorites
 
+import android.util.Log
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.favorites.repository.LocalFavoritesStorage
 
@@ -11,6 +12,8 @@ class FavoritesRepository(private val localStorage: LocalFavoritesStorage) {
 
     fun saveFavorite(movie: Movie) {
         localStorage.insertMovie(movie)
+        val name = movie.title
+        Log.d("moviePlayer", "salvei $name!")
     }
 
     fun deleteFavorite(movie: Movie) {

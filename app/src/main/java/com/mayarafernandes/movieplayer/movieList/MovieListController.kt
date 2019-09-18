@@ -31,7 +31,7 @@ class MovieListController(
                 Executors.newSingleThreadExecutor().execute {
                     val favorites = favoritesRepository.returnFavorites()
                     viewModels.map { movie ->
-                        if(favorites.find { it.id == movie.id } != null) movie.favorite = true
+                        if(favorites.find { it.id == movie.id } != null) movie.isFavorite = true
                     }
                 }
 
@@ -47,24 +47,23 @@ class MovieListController(
     }
 
     fun onSelectMovie(movie: MovieViewModel) {
-        val movieId = movie.id
-        val selectedMovie = movieRepository.onMovieSelected(movieId)
+        val selectedMovie = getSelectedMovie((movie))
     }
 
-    fun onFavorited(
-        movie: MovieViewModel,
-        favoriteButton: ToggleButton
-    ) {
+    fun addToFavorites(movie: MovieViewModel) {
+        movie.isFavorite = true
+        val selectedMovie = getSelectedMovie(movie)
+        Executors.newSingleThreadExecutor().execute { favoritesRepository.saveFavorite(selectedMovie) }
+    }
+
+    fun removeFromFavorites(movie: MovieViewModel) {
+        movie.isFavorite = false
+        val selectedMovie = getSelectedMovie(movie)
+        Executors.newSingleThreadExecutor().execute{ favoritesRepository.deleteFavorite(selectedMovie) }
+    }
+
+    private fun getSelectedMovie(movie: MovieViewModel): Movie {
         val movieId = movie.id
-        val movieSelected = movieRepository.onMovieSelected(movieId)
-
-        if(favoriteButton.isChecked) {
-            Executors.newSingleThreadExecutor().execute { favoritesRepository.saveFavorite(movieSelected) }
-        }
-        else {
-            Executors.newSingleThreadExecutor().execute{ favoritesRepository.deleteFavorite(movieSelected) }
-        }
-
-        presenter.setFavorite(favoriteButton)
+        return movieRepository.onMovieSelected(movieId)
     }
 }

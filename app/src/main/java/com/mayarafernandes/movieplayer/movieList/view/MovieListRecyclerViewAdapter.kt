@@ -47,10 +47,11 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         }
 
         val favoriteButton = holder.itemView.button_favorite
-        favoriteButton.isChecked = movie.favorite
+        favoriteButton.isChecked = movie.isFavorite
 
         favoriteButton.setOnClickListener {
-            checkListener.onCheckedChange(movie, favoriteButton)
+            if(favoriteButton.isChecked) checkListener.onCheckedChange(movie, favoriteButton)
+            else checkListener.onUncheckedChange(movie, favoriteButton)
         }
     }
 

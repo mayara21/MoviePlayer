@@ -8,7 +8,7 @@ interface MovieDao {
     fun getFavoriteMovieList(): List<RoomMovieModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addFavoriteMovie(movie: RoomMovieModel?)
+    fun addFavoriteMovie(movie: RoomMovieModel)
 
     @Update
     fun updateMovies(vararg movies: RoomMovieModel)

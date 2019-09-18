@@ -21,6 +21,7 @@ class MovieListActivity : AppCompatActivity(),
     MovieListView, MovieViewModelClickListener, FavoriteButtonCheckListener {
 
     private lateinit var controller: MovieListController
+    private lateinit var presenter: MovieListPresenter
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
 
@@ -40,7 +41,7 @@ class MovieListActivity : AppCompatActivity(),
         val memoryRepository = MemoryRepository()
         val movieRepository =
             MovieRepository(memoryRepository)
-        val presenter = MovieListPresenter()
+        presenter = MovieListPresenter()
         controller = MovieListController(movieRepository, presenter, this, favoritesRepository)
 
         val layoutManager = LinearLayoutManager(this)
@@ -85,6 +86,16 @@ class MovieListActivity : AppCompatActivity(),
         movie: MovieViewModel,
         favoriteButton: ToggleButton
     ) {
-        controller.onFavorited(movie, favoriteButton)
+        controller.addToFavorites(movie)
+        presenter.setFavoriteButton(favoriteButton)
+
+    }
+
+    override fun onUncheckedChange(
+        movie: MovieViewModel,
+        favoriteButton: ToggleButton
+    ) {
+        controller.removeFromFavorites(movie)
+        presenter.setFavoriteButton(favoriteButton)
     }
 }
