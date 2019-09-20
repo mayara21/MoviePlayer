@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.favorites.repository
+package com.mayarafernandes.movieplayer.movieList.favorites.repository
 
 import android.content.Context
 import androidx.room.Database
@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mayarafernandes.movieplayer.R
-import com.mayarafernandes.movieplayer.favorites.repository.roomConverters.*
+import com.mayarafernandes.movieplayer.movieList.favorites.repository.roomConverters.*
 
 @Database(entities = [RoomMovieModel::class], exportSchema = false, version = 1)
 @TypeConverters(ContentsConverter::class, CategoriesConverter::class, CreditsConverter::class, ImagesConverter::class, MovieMetadatasConverter::class, ParentalRatingsConverter::class)

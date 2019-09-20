@@ -17,7 +17,4 @@
     <string name="favorite_menu_name">Favoritos</string>
     <string name="movie_menu_name">Filmes</string>
     <string name="room_database_name">favorite-movies-database</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

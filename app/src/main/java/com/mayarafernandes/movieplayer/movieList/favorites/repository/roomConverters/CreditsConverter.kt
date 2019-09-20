@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.favorites.repository.roomConverters
+package com.mayarafernandes.movieplayer.movieList.favorites.repository.roomConverters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer
+package com.mayarafernandes.movieplayer.movieList.favorites
 
 import android.content.Context
 import android.os.Bundle
@@ -7,22 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mayarafernandes.movieplayer.favorites.FavoritesRepository
-import com.mayarafernandes.movieplayer.favorites.repository.MovieDao
-import com.mayarafernandes.movieplayer.favorites.repository.MovieRoomDatabase
-import com.mayarafernandes.movieplayer.favorites.repository.RoomStorage
+import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieDao
+import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomDatabase
+import com.mayarafernandes.movieplayer.movieList.favorites.repository.RoomStorage
 import com.mayarafernandes.movieplayer.movieList.MovieListController
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
 import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryRepository
 import com.mayarafernandes.movieplayer.movieList.view.*
-import kotlinx.android.synthetic.main.activity_movie_list.*
-import kotlinx.android.synthetic.main.fragment_movie_list.view.*
+import kotlinx.android.synthetic.main.activity_movie_list.noConnectionText
+import kotlinx.android.synthetic.main.fragment_favorite_list.*
+import kotlinx.android.synthetic.main.fragment_favorite_list.view.*
 
-
-class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener,
-    FavoriteButtonCheckListener {
+class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListener,
+    RemoveButtonListener {
 
     private lateinit var fragmentContext: Context
     private lateinit var controller: MovieListController
@@ -39,9 +38,9 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_favorite_list, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
-        progressBar = view.movieListLoadingProgressBar
+        progressBar = view.favoriteListLoadingProgressBar
 
         movieDao = MovieRoomDatabase.getInstance().movieDao()
 
@@ -57,10 +56,15 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
 
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        view.movieListRecyclerView.layoutManager = layoutManager
+        view.favoriteListRecyclerView.layoutManager = layoutManager
 
-        val rvAdapter = MovieListRecyclerViewAdapter(fragmentContext, this, this)
-        view.movieListRecyclerView.adapter = rvAdapter
+        val rvAdapter =
+            FavoritesRecyclerViewAdapter(
+                fragmentContext,
+                this,
+                this
+            )
+        view.favoriteListRecyclerView.adapter = rvAdapter
 
         controller.onViewCreated()
         return view
@@ -73,13 +77,9 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
 
     override fun setViewModel(viewModels: List<MovieViewModel>) {
         activity?.runOnUiThread {
-            val rvAdapter = movieListRecyclerView.adapter as MovieListRecyclerViewAdapter
-            rvAdapter.updateMovieList(viewModels)
+            val rvAdapter = favoriteListRecyclerView.adapter as FavoritesRecyclerViewAdapter
+            rvAdapter.updateMovieList(controller.getFavorites(viewModels))
         }
-    }
-
-    override fun onClick(movie: MovieViewModel) {
-        controller.onSelectMovie(movie)
     }
 
     override fun showProgressBar(show: Boolean) {
@@ -89,31 +89,21 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
 
     override fun showMovieList(show: Boolean) {
         if(show) {
-            movieListRecyclerView.visibility = View.VISIBLE
+            favoriteListRecyclerView.visibility = View.VISIBLE
             noConnectionText.visibility = View.INVISIBLE
         }
 
         else {
-            movieListRecyclerView.visibility = View.INVISIBLE
+            favoriteListRecyclerView.visibility = View.INVISIBLE
             noConnectionText.visibility = View.VISIBLE
         }
     }
 
-    override fun onCheckedChange(
-        movie: MovieViewModel,
-        favoriteButton: ToggleButton
-    ) {
-        controller.addToFavorites(movie)
-        presenter.setFavoriteButton(favoriteButton)
-
+    override fun onClick(movie: MovieViewModel) {
+        controller.onSelectMovie(movie)
     }
 
-    override fun onUncheckedChange(
-        movie: MovieViewModel,
-        favoriteButton: ToggleButton
-    ) {
+    override fun onClickRemove(movie: MovieViewModel) {
         controller.removeFromFavorites(movie)
-        presenter.setFavoriteButton(favoriteButton)
     }
-
 }

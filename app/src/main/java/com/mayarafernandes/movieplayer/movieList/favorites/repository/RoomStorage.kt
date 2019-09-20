@@ -1,4 +1,4 @@
-package com.mayarafernandes.movieplayer.favorites.repository
+package com.mayarafernandes.movieplayer.movieList.favorites.repository
 
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 
