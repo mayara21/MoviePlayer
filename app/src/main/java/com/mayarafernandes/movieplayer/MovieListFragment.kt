@@ -2,7 +2,6 @@ package com.mayarafernandes.movieplayer
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.mayarafernandes.movieplayer.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.favorites.repository.MovieDao
 import com.mayarafernandes.movieplayer.favorites.repository.MovieRoomDatabase
@@ -32,24 +30,20 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
 
+    override fun onAttach(context: Context) {
+        fragmentContext = context
+        super.onAttach(context)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        Log.d("moviePlayer", "Cheguei 2")
         val view = inflater.inflate(R.layout.fragment_movie_list, container, false)
         progressBar = view.movieListLoadingProgressBar
 
-        val layoutManager = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        view.movieListRecyclerView.layoutManager = layoutManager
-
-        val rvAdapter = MovieListRecyclerViewAdapter(fragmentContext, this, this)
-        view.movieListRecyclerView.adapter = rvAdapter
-
-        val database = Room.databaseBuilder(fragmentContext, MovieRoomDatabase::class.java, "favorite-movies-database").build()
-        movieDao = database.movieDao()
+        movieDao = MovieRoomDatabase.getInstance().movieDao()
 
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
@@ -61,13 +55,15 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         presenter = MovieListPresenter()
         controller = MovieListController(movieRepository, presenter, this, favoritesRepository)
 
+        val layoutManager = LinearLayoutManager(activity)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        view.movieListRecyclerView.layoutManager = layoutManager
+
+        val rvAdapter = MovieListRecyclerViewAdapter(fragmentContext, this, this)
+        view.movieListRecyclerView.adapter = rvAdapter
+
         controller.onViewCreated()
         return view
-    }
-
-    override fun onAttach(context: Context) {
-        fragmentContext = context
-        super.onAttach(context)
     }
 
     override fun onStart() {

@@ -1,6 +1,7 @@
 package com.mayarafernandes.movieplayer.movieList.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         }
 
         val favoriteButton = holder.itemView.button_favorite
+
         favoriteButton.isChecked = movie.isFavorite
 
         favoriteButton.setOnClickListener {

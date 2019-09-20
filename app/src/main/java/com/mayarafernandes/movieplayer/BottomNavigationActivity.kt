@@ -28,9 +28,10 @@ class BottomNavigationActivity : AppCompatActivity() {
             if(itemId == R.id.nav_movies) selectedFragment = MovieListFragment()
             else if(itemId == R.id.nav_favorites) selectedFragment = FavoriteListFragment()
 
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, selectedFragment!!).commit()
+            supportFragmentManager.beginTransaction().setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).replace(R.id.fragment_container, selectedFragment!!).commitAllowingStateLoss()
 
             true
         }
     }
+
 }

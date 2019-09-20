@@ -1,7 +1,7 @@
 package com.mayarafernandes.movieplayer.movieList
 
 import android.util.Log
-import android.widget.ToggleButton
+import android.view.View
 import com.mayarafernandes.movieplayer.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
@@ -30,12 +30,15 @@ class MovieListController(
 
                 Executors.newSingleThreadExecutor().execute {
                     val favorites = favoritesRepository.returnFavorites()
+
                     viewModels.map { movie ->
                         if(favorites.find { it.id == movie.id } != null) movie.isFavorite = true
                     }
+
+                    view.setViewModel(viewModels)
                 }
 
-                view.setViewModel(viewModels)
+
                 view.showProgressBar(false)
             }
 

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+            android:name=".MoviePlayerApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -22,19 +23,10 @@
 
         </activity>
 
-        <activity
-                android:name=".movieList.view.MovieListActivity"
-                android:parentActivityName=".login.view.LoginActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".login.view.LoginActivity" />
-        </activity>
 
         <activity android:name=".splash.SplashActivity">
 
         </activity>
-
-        <activity android:name=".DisplayMessage" />
 
         <activity android:name=".login.view.LoginActivity" />
 
