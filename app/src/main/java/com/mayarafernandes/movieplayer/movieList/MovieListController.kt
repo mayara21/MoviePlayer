@@ -65,6 +65,10 @@ class MovieListController(
         Executors.newSingleThreadExecutor().execute{ favoritesRepository.deleteFavorite(selectedMovie) }
     }
 
+    fun getFavorites(viewModels: List<MovieViewModel>): List<MovieViewModel> {
+        return viewModels.filter { it.isFavorite }
+    }
+
     private fun getSelectedMovie(movie: MovieViewModel): Movie {
         val movieId = movie.id
         return movieRepository.onMovieSelected(movieId)
