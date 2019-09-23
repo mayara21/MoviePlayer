@@ -20,7 +20,6 @@ import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryReposi
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import kotlinx.android.synthetic.main.fragment_movie_list.view.*
 
-
 class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener,
     FavoriteButtonCheckListener {
 
@@ -82,36 +81,29 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         controller.onSelectMovie(movie)
     }
 
-    override fun showProgressBar(show: Boolean) {
-        if(show) progressBar.visibility = View.VISIBLE
-        else progressBar.visibility = View.GONE
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
     }
 
-    override fun showMovieList(show: Boolean) {
-        if(show) {
-            movieListRecyclerView.visibility = View.VISIBLE
-            noConnectionText.visibility = View.INVISIBLE
-        }
-
-        else {
-            movieListRecyclerView.visibility = View.INVISIBLE
-            noConnectionText.visibility = View.VISIBLE
-        }
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 
-    override fun onCheckedChange(
-        movie: MovieViewModel,
-        favoriteButton: ToggleButton
-    ) {
+    override fun showMovieList() {
+        movieListRecyclerView.visibility = View.VISIBLE
+        noConnectionText.visibility = View.INVISIBLE
+    }
+
+    override fun hideMovieList() {
+        movieListRecyclerView.visibility = View.INVISIBLE
+        noConnectionText.visibility = View.VISIBLE
+    }
+
+    override fun onCheckedChange(movie: MovieViewModel) {
         controller.addToFavorites(movie)
-        presenter.setFavoriteButton(favoriteButton)
     }
 
-    override fun onUncheckedChange(
-        movie: MovieViewModel,
-        favoriteButton: ToggleButton
-    ) {
+    override fun onUncheckedChange(movie: MovieViewModel) {
         controller.removeFromFavorites(movie)
-        presenter.setFavoriteButton(favoriteButton)
     }
 }

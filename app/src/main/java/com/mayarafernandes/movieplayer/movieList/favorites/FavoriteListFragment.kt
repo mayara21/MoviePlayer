@@ -16,6 +16,7 @@ import com.mayarafernandes.movieplayer.movieList.MovieListController
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
 import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryRepository
 import com.mayarafernandes.movieplayer.movieList.view.*
+import kotlinx.android.synthetic.main.activity_movie_list.*
 import kotlinx.android.synthetic.main.activity_movie_list.noConnectionText
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 import kotlinx.android.synthetic.main.fragment_favorite_list.view.*
@@ -58,12 +59,7 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         view.favoriteListRecyclerView.layoutManager = layoutManager
 
-        val rvAdapter =
-            FavoritesRecyclerViewAdapter(
-                fragmentContext,
-                this,
-                this
-            )
+        val rvAdapter = FavoritesRecyclerViewAdapter(fragmentContext, this, this)
         view.favoriteListRecyclerView.adapter = rvAdapter
 
         controller.onViewCreated()
@@ -82,25 +78,26 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
         }
     }
 
-    override fun showProgressBar(show: Boolean) {
-        if(show) progressBar.visibility = View.VISIBLE
-        else progressBar.visibility = View.GONE
-    }
-
-    override fun showMovieList(show: Boolean) {
-        if(show) {
-            favoriteListRecyclerView.visibility = View.VISIBLE
-            noConnectionText.visibility = View.INVISIBLE
-        }
-
-        else {
-            favoriteListRecyclerView.visibility = View.INVISIBLE
-            noConnectionText.visibility = View.VISIBLE
-        }
-    }
-
     override fun onClick(movie: MovieViewModel) {
         controller.onSelectMovie(movie)
+    }
+
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
+
+    override fun showMovieList() {
+        favoriteListRecyclerView.visibility = View.VISIBLE
+        noConnectionText.visibility = View.INVISIBLE
+    }
+
+    override fun hideMovieList() {
+        favoriteListRecyclerView.visibility = View.INVISIBLE
+        noConnectionText.visibility = View.VISIBLE
     }
 
     override fun onClickRemove(movie: MovieViewModel) {

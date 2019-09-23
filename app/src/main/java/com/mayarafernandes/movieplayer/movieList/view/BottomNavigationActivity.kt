@@ -40,5 +40,4 @@ class BottomNavigationActivity : AppCompatActivity() {
             true
         }
     }
-
 }

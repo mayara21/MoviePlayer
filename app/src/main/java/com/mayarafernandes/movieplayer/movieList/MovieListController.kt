@@ -17,7 +17,7 @@ class MovieListController(
 ) {
 
     fun onViewCreated() {
-        view.showProgressBar(true)
+        view.showProgressBar()
         var viewModels: List<MovieViewModel>
 
         movieRepository.returnMovieList(object: MovieCallbacks {
@@ -36,13 +36,12 @@ class MovieListController(
                     view.setViewModel(viewModels)
                 }
 
-
-                view.showProgressBar(false)
+                view.hideProgressBar()
             }
 
             override fun onError() {
-                view.showProgressBar(false)
-                view.showMovieList(false)
+                view.hideProgressBar()
+                view.hideMovieList()
             }
         })
     }
