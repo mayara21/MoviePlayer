@@ -13,10 +13,9 @@ import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieDao
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomDatabase
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.RoomStorage
 import com.mayarafernandes.movieplayer.movieList.MovieListController
-import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
+import com.mayarafernandes.movieplayer.movieList.repository.MovieRepositoryImpl
 import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryRepository
 import com.mayarafernandes.movieplayer.movieList.view.*
-import kotlinx.android.synthetic.main.activity_movie_list.*
 import kotlinx.android.synthetic.main.activity_movie_list.noConnectionText
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 import kotlinx.android.synthetic.main.fragment_favorite_list.view.*
@@ -26,7 +25,7 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
 
     private lateinit var fragmentContext: Context
     private lateinit var controller: MovieListController
-    private lateinit var presenter: MovieListPresenter
+    private lateinit var presenter: MovieListPresenterImpl
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
 
@@ -47,12 +46,12 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
 
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
-            FavoritesRepository(roomStorage)
+            FavoritesRepositoryImpl(roomStorage)
         val memoryRepository = MemoryRepository()
         val movieRepository =
-            MovieRepository(memoryRepository)
+            MovieRepositoryImpl(memoryRepository)
 
-        presenter = MovieListPresenter()
+        presenter = MovieListPresenterImpl()
         controller = MovieListController(movieRepository, presenter, this, favoritesRepository)
 
         val layoutManager = LinearLayoutManager(activity)

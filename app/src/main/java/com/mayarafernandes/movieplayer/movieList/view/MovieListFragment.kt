@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.ToggleButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mayarafernandes.movieplayer.R
-import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepository
+import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepositoryImpl
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieDao
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomDatabase
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.RoomStorage
 import com.mayarafernandes.movieplayer.movieList.MovieListController
-import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
+import com.mayarafernandes.movieplayer.movieList.repository.MovieRepositoryImpl
 import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryRepository
 import kotlinx.android.synthetic.main.activity_movie_list.*
 import kotlinx.android.synthetic.main.fragment_movie_list.view.*
@@ -25,7 +24,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
 
     private lateinit var fragmentContext: Context
     private lateinit var controller: MovieListController
-    private lateinit var presenter: MovieListPresenter
+    private lateinit var presenter: MovieListPresenterImpl
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
 
@@ -46,12 +45,12 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
 
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
-            FavoritesRepository(roomStorage)
+            FavoritesRepositoryImpl(roomStorage)
         val memoryRepository = MemoryRepository()
         val movieRepository =
-            MovieRepository(memoryRepository)
+            MovieRepositoryImpl(memoryRepository)
 
-        presenter = MovieListPresenter()
+        presenter = MovieListPresenterImpl()
         controller = MovieListController(movieRepository, presenter, this, favoritesRepository)
 
         val layoutManager = LinearLayoutManager(activity)

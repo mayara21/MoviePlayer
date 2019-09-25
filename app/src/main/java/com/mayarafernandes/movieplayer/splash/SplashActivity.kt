@@ -7,7 +7,7 @@ import com.mayarafernandes.movieplayer.R
 
 class SplashActivity : AppCompatActivity(), SplashView {
 
-    private val navigator = SplashNavigator(this)
+    private val navigator = SplashNavigatorImpl(this)
     private val controller: SplashController = SplashController(navigator, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
