@@ -14,6 +14,7 @@ import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomD
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.RoomStorage
 import com.mayarafernandes.movieplayer.movieList.MovieListController
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepositoryImpl
+import com.mayarafernandes.movieplayer.movieList.repository.service.MovieServiceIMPL
 import com.mayarafernandes.movieplayer.movieList.repository.storage.MemoryRepository
 import com.mayarafernandes.movieplayer.movieList.view.*
 import kotlinx.android.synthetic.main.activity_movie_list.noConnectionText
@@ -48,8 +49,9 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
         val favoritesRepository =
             FavoritesRepositoryImpl(roomStorage)
         val memoryRepository = MemoryRepository()
+        val movieService = MovieServiceIMPL()
         val movieRepository =
-            MovieRepositoryImpl(memoryRepository)
+            MovieRepositoryImpl(memoryRepository, movieService)
 
         presenter = MovieListPresenterImpl()
         controller = MovieListController(movieRepository, presenter, this, favoritesRepository)

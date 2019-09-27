@@ -1,11 +1,11 @@
 package com.mayarafernandes.movieplayer.movieList.repository
 
 import com.mayarafernandes.movieplayer.movieList.repository.service.MovieCallbacks
+import com.mayarafernandes.movieplayer.movieList.repository.service.MovieService
 import com.mayarafernandes.movieplayer.movieList.repository.service.MovieServiceIMPL
 import com.mayarafernandes.movieplayer.movieList.repository.storage.LocalMovieStorage
 
-class MovieRepositoryImpl (private val localMovieStorage: LocalMovieStorage): MovieRepository {
-    private val movieService = MovieServiceIMPL()
+class MovieRepositoryImpl (private val localMovieStorage: LocalMovieStorage, private val movieService: MovieService): MovieRepository {
 
     override fun returnMovieList(movieCallbacks: MovieCallbacks) {
         movieService.returnMovieList(object: MovieCallbacks {

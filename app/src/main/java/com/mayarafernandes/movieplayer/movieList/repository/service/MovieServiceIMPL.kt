@@ -7,10 +7,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MovieServiceIMPL {
+class MovieServiceIMPL: MovieService {
     private val apiEndpoint = "https://private-62c15f-movies295.apiary-mock.com/"
 
-    fun returnMovieList(movieServiceCallback: MovieCallbacks) {
+    override fun returnMovieList(movieServiceCallback: MovieCallbacks) {
         var movieServiceList: List<MovieDTO>
         var movieList: List<Movie>
 
@@ -21,7 +21,7 @@ class MovieServiceIMPL {
         val movieService = RetrofitConfig(
             apiEndpoint,
             gson
-        ).buildService(MovieService::class.java)
+        ).buildService(MovieServiceAccess::class.java)
         val requestCall: Call<List<MovieDTO>> = movieService.returnMovieList()
 
         requestCall.enqueue(object: Callback<List<MovieDTO>> {
