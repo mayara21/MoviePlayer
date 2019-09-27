@@ -44,7 +44,6 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
         progressBar = view.favoriteListLoadingProgressBar
 
         movieDao = MovieRoomDatabase.getInstance().movieDao()
-
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
             FavoritesRepository(roomStorage)
