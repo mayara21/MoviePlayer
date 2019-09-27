@@ -11,4 +11,5 @@ data class Movie(val title: String,
                  val parentalRatings: List<ParentalRating>,
                  val images: List<Image>,
                  val categories: List<Category>,
-                 val id: String)
+                 val id: String,
+                 val favorite: Boolean = false)
