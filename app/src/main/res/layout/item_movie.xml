@@ -61,6 +61,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/movieTitleTextView"
                 app:layout_constraintVertical_bias="0.0" />
 
+        <ImageView
+                android:id="@+id/playButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/movieIconImageView"
+                app:layout_constraintEnd_toEndOf="@+id/movieIconImageView"
+                app:layout_constraintStart_toStartOf="@+id/movieIconImageView"
+                app:layout_constraintTop_toTopOf="@+id/movieIconImageView"
+                app:srcCompat="@drawable/ic_play_circle_filled_black_24dp" />
+
         <ToggleButton
                 android:id="@+id/button_favorite"
                 android:layout_width="30dp"

@@ -10,5 +10,9 @@
             android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_favorite_black_24dp"
             android:title="@string/favorite_menu_name"/>
+    <item
+            android:id="@+id/nav_keep_watching"
+            android:icon="@drawable/ic_play_arrow_black_24dp"
+            android:title="@string/keep_watching"/>
 
 </menu>

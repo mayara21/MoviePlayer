@@ -72,5 +72,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_remove_circle_black_24dp" />
 
+        <ImageView
+                android:id="@+id/playButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/movieIconImageView"
+                app:layout_constraintEnd_toEndOf="@+id/movieIconImageView"
+                app:layout_constraintStart_toStartOf="@+id/movieIconImageView"
+                app:layout_constraintTop_toTopOf="@+id/movieIconImageView"
+                app:srcCompat="@drawable/ic_play_circle_filled_black_24dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
