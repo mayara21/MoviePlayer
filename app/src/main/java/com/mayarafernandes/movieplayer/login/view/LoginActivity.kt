@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.mayarafernandes.movieplayer.R
-import com.mayarafernandes.movieplayer.login.Login
-import com.mayarafernandes.movieplayer.login.LoginController
-import com.mayarafernandes.movieplayer.login.LoginNavigator
-import com.mayarafernandes.movieplayer.login.SavedEmail
+import com.mayarafernandes.movieplayer.login.*
 import com.mayarafernandes.movieplayer.login.storage.SharedPrefAccess
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -22,9 +19,9 @@ class LoginActivity : AppCompatActivity(), LoginView {
         setContentView(R.layout.activity_login)
 
         val sharedPrefAccess = SharedPrefAccess(this)
-        val savedEmail = SavedEmail(sharedPrefAccess)
-        val navigator = LoginNavigator(this)
-        val login = Login(savedEmail)
+        val savedEmail = SavedEmailImpl(sharedPrefAccess)
+        val navigator = LoginNavigatorImpl(this)
+        val login = LoginImpl(savedEmail)
 
         controller = LoginController(this, savedEmail, navigator, login)
 

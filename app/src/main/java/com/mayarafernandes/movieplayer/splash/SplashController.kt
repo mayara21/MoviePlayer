@@ -2,10 +2,10 @@ package com.mayarafernandes.movieplayer.splash
 
 import android.os.Handler
 
-class SplashController (private val navigator: SplashNavigator, private val view: SplashView){
+class SplashController (private val navigator: SplashNavigator, private val view: SplashView, private val handler: Handler){
 
     fun onViewCreated() {
-        Handler().postDelayed( {
+        handler.postDelayed( {
             navigator.goToLogin()
 
             view.finish()
