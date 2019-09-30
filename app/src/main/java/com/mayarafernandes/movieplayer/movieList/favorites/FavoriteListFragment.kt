@@ -88,7 +88,9 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
     }
 
     override fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        activity?.runOnUiThread {
+            progressBar.visibility = View.GONE
+        }
     }
 
     override fun showMovieList() {

@@ -34,9 +34,8 @@ class MovieListController(
                     }
 
                     view.setViewModel(viewModels)
+                    view.hideProgressBar()
                 }
-
-                view.hideProgressBar()
             }
 
             override fun onError() {

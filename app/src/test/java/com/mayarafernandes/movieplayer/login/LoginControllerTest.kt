@@ -53,6 +53,6 @@ class LoginControllerTest {
         whenever(login.doLogin(email, password)).thenReturn(true)
         controller.onLoginDo(email, "fail")
 
-        verify(view).showLoginErrorMessageText(LOGIN_ERROR_MESSAGE)
+        verify(view).showLoginErrorMessageText("E-mail ou senha incorretos")
     }
 }
