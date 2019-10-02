@@ -9,5 +9,6 @@ class MovieListPresenterImpl: MovieListPresenter {
         movie.description,
         movie.images.find { it.type == "cover" }!!.url,
         movie.id,
-        false)
+        false,
+        0)
 }

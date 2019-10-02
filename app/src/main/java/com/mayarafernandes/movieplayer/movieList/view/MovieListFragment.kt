@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.*
 import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepositoryImpl
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieDao
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomDatabase
@@ -28,6 +28,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
     private lateinit var presenter: MovieListPresenterImpl
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
+    private lateinit var progressDao: ProgressDao
 
     override fun onAttach(context: Context) {
         fragmentContext = context
@@ -43,6 +44,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         progressBar = view.movieListLoadingProgressBar
 
         movieDao = MovieRoomDatabase.getInstance().movieDao()
+        progressDao = MovieRoomDatabase.getInstance().progressDao()
 
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
@@ -52,8 +54,12 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         val movieRepository =
             MovieRepositoryImpl(memoryRepository, movieService)
 
+        val progressStorage = RoomProgressStorage(progressDao)
+
+        val keepWatchingRepository = KeepWatchingRepositoryImpl(progressStorage, memoryRepository)
+
         presenter = MovieListPresenterImpl()
-        controller = MovieListController(movieRepository, presenter, this, favoritesRepository)
+        controller = MovieListController(movieRepository, presenter, this, favoritesRepository, keepWatchingRepository)
 
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL

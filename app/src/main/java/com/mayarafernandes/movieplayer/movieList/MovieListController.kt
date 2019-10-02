@@ -1,5 +1,7 @@
 package com.mayarafernandes.movieplayer.movieList
 
+import com.mayarafernandes.movieplayer.KeepWatchingRepository
+import com.mayarafernandes.movieplayer.ProgressModel
 import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
@@ -13,7 +15,8 @@ class MovieListController(
     private val movieRepository: MovieRepository,
     private val presenter: MovieListPresenter,
     private val view: MovieListView,
-    private val favoritesRepository: FavoritesRepository
+    private val favoritesRepository: FavoritesRepository,
+    private val keepWatchingRepository: KeepWatchingRepository
 ) {
 
     fun onViewCreated() {
@@ -31,6 +34,7 @@ class MovieListController(
 
                     viewModels.map { movie ->
                         if(favorites.find { it.id == movie.id } != null) movie.isFavorite = true
+                        movie.progress = keepWatchingRepository.getProgress(movie.id)
                     }
 
                     view.setViewModel(viewModels)

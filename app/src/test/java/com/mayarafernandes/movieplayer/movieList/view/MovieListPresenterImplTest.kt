@@ -33,5 +33,5 @@ class MovieListPresenterImplTest {
         false
     )
 
-    private fun setResult() = MovieViewModel("filme teste", "descricao teste", "oioi", "teste123", false)
+    private fun setResult() = MovieViewModel("filme teste", "descricao teste", "oioi", "teste123", false, 0)
 }

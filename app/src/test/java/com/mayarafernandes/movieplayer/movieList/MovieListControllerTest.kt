@@ -1,5 +1,6 @@
 package com.mayarafernandes.movieplayer.movieList
 
+import com.mayarafernandes.movieplayer.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
@@ -17,7 +18,8 @@ class MovieListControllerTest {
     private val presenter = mock<MovieListPresenter>()
     private val view = mock<MovieListView>()
     private val favoritesRepository = mock<FavoritesRepository>()
-    private val controller = MovieListController(movieRepository, presenter, view, favoritesRepository)
+    private val keepWatchingRepository = mock<KeepWatchingRepository>()
+    private val controller = MovieListController(movieRepository, presenter, view, favoritesRepository, keepWatchingRepository)
 
     @Test
     fun `test when call getFavorites expect favorites`() {
@@ -153,13 +155,15 @@ class MovieListControllerTest {
         "description",
         "url",
         "test123",
-        false
+        false,
+        0
     ), MovieViewModel(
         "test",
         "description",
         "",
         "test456",
-        true
+        true,
+            0
     ))
 
     private fun setExpectedFavorite() = MovieViewModel(
@@ -167,7 +171,8 @@ class MovieListControllerTest {
         "description",
         "",
         "test456",
-        true
+        true,
+        0
     )
 
     private fun setExpectedSelectedMovie() = Movie(
@@ -209,6 +214,7 @@ class MovieListControllerTest {
         "description",
         "",
         "test456",
-        true
+        true,
+        0
     ))
 }

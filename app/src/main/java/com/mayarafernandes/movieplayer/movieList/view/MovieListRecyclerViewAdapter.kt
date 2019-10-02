@@ -51,6 +51,7 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         }
 
         val favoriteButton = holder.itemView.button_favorite
+        val progressBar = holder.itemView.movieProgressBar
 
         favoriteButton.isChecked = movie.isFavorite
 
@@ -59,6 +60,8 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
             else checkListener.onUncheckedChange(movie)
             setFavoriteButton(favoriteButton)
         }
+
+        progressBar.progress = movie.progress
     }
 
     fun updateMovieList(movies: List<MovieViewModel>)  {

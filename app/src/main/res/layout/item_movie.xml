@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="133dp">
 
         <ImageView
                 android:id="@+id/movieIconImageView"
@@ -36,10 +36,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@string/movieTitle"
                 android:textStyle="bold"
-                android:maxLines="2"
-                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.018"
                 app:layout_constraintStart_toEndOf="@+id/movieIconImageView"
@@ -50,10 +50,10 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/movieDescription"
                 android:autoSizeTextType="uniform"
-                android:maxLines="3"
                 android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@string/movieDescription"
                 app:layout_constraintBottom_toBottomOf="@+id/movieIconImageView"
                 app:layout_constraintEnd_toEndOf="@+id/movieTitleTextView"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -86,6 +86,16 @@
                 android:textOn=""
                 app:layout_constraintBottom_toBottomOf="@+id/movieIconImageView"
                 app:layout_constraintStart_toStartOf="@+id/movieIconImageView" />
+
+        <ProgressBar
+                android:id="@+id/movieProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/movieIconImageView"
+                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintStart_toStartOf="@+id/movieIconImageView"
+                app:layout_constraintTop_toBottomOf="@+id/movieIconImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
