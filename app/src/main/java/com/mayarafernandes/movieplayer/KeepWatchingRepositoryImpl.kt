@@ -1,16 +1,21 @@
 package com.mayarafernandes.movieplayer
 
+import android.util.Log
 import com.mayarafernandes.movieplayer.movieList.repository.storage.LocalMovieStorage
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
 
 class KeepWatchingRepositoryImpl(private val localProgressStorage: LocalProgressStorage, private val memoryRepository: LocalMovieStorage): KeepWatchingRepository {
 
     override fun saveProgress(movie: MovieViewModel, watched: Double) {
+        var progress: Int
         val movies = memoryRepository.returnMovieList()
         val selected = movies.find { it.id == movie.id }
         val duration = selected!!.contents[0].duration
-        val progress = ((watched/duration) * 100).toInt()
 
+        progress = if(watched > duration) 100
+        else ((watched/duration) * 100).toInt()
+
+        Log.d("moviePlayer",  "Duracao: $duration, assistido: $watched, salvando progresso $progress")
         localProgressStorage.saveProgress(ProgressModel(movie.id, progress))
     }
 

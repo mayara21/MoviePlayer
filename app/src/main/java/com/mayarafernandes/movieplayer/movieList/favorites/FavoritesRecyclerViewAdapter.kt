@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.WatchClickListener
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModelClickListener
 import kotlinx.android.synthetic.main.item_favorite.view.*
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.item_movie.view.movieDescriptionTextView
 import kotlinx.android.synthetic.main.item_movie.view.movieIconImageView
 import kotlinx.android.synthetic.main.item_movie.view.movieTitleTextView
 
-class FavoritesRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val removeListener: RemoveButtonListener): RecyclerView.Adapter<FavoritesRecyclerViewAdapter.MyViewHolder>() {
+class FavoritesRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val removeListener: RemoveButtonListener, private val watchClickListener: WatchClickListener): RecyclerView.Adapter<FavoritesRecyclerViewAdapter.MyViewHolder>() {
 
     private var movieList = mutableListOf<MovieViewModel>()
 
@@ -47,6 +48,10 @@ class FavoritesRecyclerViewAdapter(private val context: Context, private val cli
             clickListener.onClick(movie)
         }
 
+        holder.playIcon.setOnClickListener {
+            watchClickListener.onClickPlay(movie)
+        }
+
         val removeButton = holder.itemView.removeButton
 
         removeButton.setOnClickListener {
@@ -70,5 +75,6 @@ class FavoritesRecyclerViewAdapter(private val context: Context, private val cli
         val title: TextView = itemView.movieTitleTextView
         val description: TextView = itemView.movieDescriptionTextView
         val imageView: ImageView = itemView.movieIconImageView
+        val playIcon: ImageView = itemView.playButton
     }
 }

@@ -2,7 +2,7 @@ package com.mayarafernandes.movieplayer.movieList.repository.storage
 
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 
-class MemoryRepository: LocalMovieStorage {
+object MemoryRepository: LocalMovieStorage {
 
     var movieList: List<Movie> = emptyList()
 

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_movie_list.*
 import kotlinx.android.synthetic.main.fragment_movie_list.view.*
 
 class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener,
-    FavoriteButtonCheckListener {
+    FavoriteButtonCheckListener, WatchClickListener {
 
     private lateinit var fragmentContext: Context
     private lateinit var controller: MovieListController
@@ -49,7 +49,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
             FavoritesRepositoryImpl(roomStorage)
-        val memoryRepository = MemoryRepository()
+        val memoryRepository = MemoryRepository
         val movieService = MovieServiceIMPL()
         val movieRepository =
             MovieRepositoryImpl(memoryRepository, movieService)
@@ -65,7 +65,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         view.movieListRecyclerView.layoutManager = layoutManager
 
-        val rvAdapter = MovieListRecyclerViewAdapter(fragmentContext, this, this)
+        val rvAdapter = MovieListRecyclerViewAdapter(fragmentContext, this, this, this)
         view.movieListRecyclerView.adapter = rvAdapter
 
         controller.onViewCreated()
@@ -114,5 +114,11 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
 
     override fun onUncheckedChange(movie: MovieViewModel) {
         controller.removeFromFavorites(movie)
+    }
+
+    override fun onClickPlay(movie: MovieViewModel) {
+        //temporary behavior
+        val watched = 1000000.0
+        controller.saveProgress(movie, watched)
     }
 }

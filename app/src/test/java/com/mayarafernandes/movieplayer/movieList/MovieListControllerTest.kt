@@ -5,6 +5,7 @@ import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
 import com.mayarafernandes.movieplayer.movieList.repository.service.MovieCallbacks
+import com.mayarafernandes.movieplayer.movieList.repository.storage.LocalMovieStorage
 import com.mayarafernandes.movieplayer.movieList.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.movieList.view.MovieListView
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
@@ -19,6 +20,7 @@ class MovieListControllerTest {
     private val view = mock<MovieListView>()
     private val favoritesRepository = mock<FavoritesRepository>()
     private val keepWatchingRepository = mock<KeepWatchingRepository>()
+    private val localMovieListView = mock<LocalMovieStorage>()
     private val controller = MovieListController(movieRepository, presenter, view, favoritesRepository, keepWatchingRepository)
 
     @Test
@@ -63,6 +65,22 @@ class MovieListControllerTest {
         controller.removeFromFavorites(movie)
 
         assertFalse(movie.isFavorite)
+    }
+
+    @Test
+    fun `test when call saveProgress expect call save progress in repository`() {
+        val watched = 4000.0
+        val movie = MovieViewModel(
+            "title",
+            "description",
+            "",
+            "id",
+            false,
+            0
+        )
+
+        controller.saveProgress(movie, watched)
+        verify(keepWatchingRepository).saveProgress(movie, watched)
     }
 
     @Test

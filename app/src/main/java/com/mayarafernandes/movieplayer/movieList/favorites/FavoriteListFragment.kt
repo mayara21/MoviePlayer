@@ -8,10 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mayarafernandes.movieplayer.KeepWatchingRepositoryImpl
-import com.mayarafernandes.movieplayer.ProgressDao
-import com.mayarafernandes.movieplayer.R
-import com.mayarafernandes.movieplayer.RoomProgressStorage
+import com.mayarafernandes.movieplayer.*
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieDao
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomDatabase
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.RoomStorage
@@ -25,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_favorite_list.*
 import kotlinx.android.synthetic.main.fragment_favorite_list.view.*
 
 class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListener,
-    RemoveButtonListener {
+    RemoveButtonListener, WatchClickListener {
 
     private lateinit var fragmentContext: Context
     private lateinit var controller: MovieListController
@@ -53,7 +50,7 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
         val roomStorage = RoomStorage(movieDao)
         val favoritesRepository =
             FavoritesRepositoryImpl(roomStorage)
-        val memoryRepository = MemoryRepository()
+        val memoryRepository = MemoryRepository
         val movieService = MovieServiceIMPL()
         val movieRepository =
             MovieRepositoryImpl(memoryRepository, movieService)
@@ -69,7 +66,7 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         view.favoriteListRecyclerView.layoutManager = layoutManager
 
-        val rvAdapter = FavoritesRecyclerViewAdapter(fragmentContext, this, this)
+        val rvAdapter = FavoritesRecyclerViewAdapter(fragmentContext, this, this, this)
         view.favoriteListRecyclerView.adapter = rvAdapter
 
         controller.onViewCreated()
@@ -114,5 +111,11 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
 
     override fun onClickRemove(movie: MovieViewModel) {
         controller.removeFromFavorites(movie)
+    }
+
+    override fun onClickPlay(movie: MovieViewModel) {
+        //temporary behavior
+        val watched = 1000000.0
+        controller.saveProgress(movie, watched)
     }
 }

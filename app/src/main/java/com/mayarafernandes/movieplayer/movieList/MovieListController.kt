@@ -1,11 +1,13 @@
 package com.mayarafernandes.movieplayer.movieList
 
+import android.util.Log
 import com.mayarafernandes.movieplayer.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.ProgressModel
 import com.mayarafernandes.movieplayer.movieList.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.movieList.repository.Movie
 import com.mayarafernandes.movieplayer.movieList.repository.MovieRepository
 import com.mayarafernandes.movieplayer.movieList.repository.service.MovieCallbacks
+import com.mayarafernandes.movieplayer.movieList.repository.storage.LocalMovieStorage
 import com.mayarafernandes.movieplayer.movieList.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.movieList.view.MovieListView
 import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
@@ -31,10 +33,11 @@ class MovieListController(
 
                 Executors.newSingleThreadExecutor().execute {
                     val favorites = favoritesRepository.returnFavorites()
+                    val progressList = keepWatchingRepository.returnKeepWatchingList()
 
                     viewModels.map { movie ->
                         if(favorites.find { it.id == movie.id } != null) movie.isFavorite = true
-                        movie.progress = keepWatchingRepository.getProgress(movie.id)
+                        if(progressList.find { it.id == movie.id } != null) movie.progress = keepWatchingRepository.getProgress(movie.id)
                     }
 
                     view.setViewModel(viewModels)
@@ -44,6 +47,7 @@ class MovieListController(
 
             override fun onError() {
                 view.hideProgressBar()
+                Log.d("moviePlayer", "cheguei aqui")
                 view.hideMovieList()
             }
         })
@@ -67,6 +71,14 @@ class MovieListController(
 
     fun getFavorites(viewModels: List<MovieViewModel>): List<MovieViewModel> {
         return viewModels.filter { it.isFavorite }
+    }
+
+    fun getWatching(viewModels: List<MovieViewModel>): List<MovieViewModel> {
+        return viewModels.filter { it.progress in 10..90 }
+    }
+
+    fun saveProgress(movie: MovieViewModel, watched: Double) {
+        Executors.newSingleThreadExecutor().execute { keepWatchingRepository.saveProgress(movie, watched) }
     }
 
     private fun getSelectedMovie(movie: MovieViewModel): Movie {

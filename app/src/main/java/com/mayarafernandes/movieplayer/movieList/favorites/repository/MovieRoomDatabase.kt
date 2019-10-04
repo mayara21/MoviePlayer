@@ -11,7 +11,7 @@ import com.mayarafernandes.movieplayer.R
 import com.mayarafernandes.movieplayer.RoomProgressModel
 import com.mayarafernandes.movieplayer.movieList.favorites.repository.roomConverters.*
 
-@Database(entities = [RoomMovieModel::class, RoomProgressModel::class], exportSchema = false, version = 2)
+@Database(entities = [RoomMovieModel::class, RoomProgressModel::class], exportSchema = false, version = 3)
 @TypeConverters(ContentsConverter::class, CategoriesConverter::class, CreditsConverter::class, ImagesConverter::class, MovieMetadatasConverter::class, ParentalRatingsConverter::class)
 abstract class MovieRoomDatabase : RoomDatabase() {
 

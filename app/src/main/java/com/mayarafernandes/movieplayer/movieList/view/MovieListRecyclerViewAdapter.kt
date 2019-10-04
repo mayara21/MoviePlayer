@@ -8,14 +8,16 @@ import android.view.animation.Animation
 import android.view.animation.BounceInterpolator
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mayarafernandes.movieplayer.R
+import com.mayarafernandes.movieplayer.WatchClickListener
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val checkListener: FavoriteButtonCheckListener): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
+class MovieListRecyclerViewAdapter(private val context: Context, private val clickListener: MovieViewModelClickListener, private val checkListener: FavoriteButtonCheckListener, private val watchClickListener: WatchClickListener): RecyclerView.Adapter<MovieListRecyclerViewAdapter.MyViewHolder>() {
 
     private var movieList = mutableListOf<MovieViewModel>()
 
@@ -50,8 +52,8 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
             clickListener.onClick(movie)
         }
 
-        val favoriteButton = holder.itemView.button_favorite
-        val progressBar = holder.itemView.movieProgressBar
+        val favoriteButton = holder.favoriteButton
+        val progressBar = holder.progressBar
 
         favoriteButton.isChecked = movie.isFavorite
 
@@ -59,6 +61,10 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
             if(favoriteButton.isChecked) checkListener.onCheckedChange(movie)
             else checkListener.onUncheckedChange(movie)
             setFavoriteButton(favoriteButton)
+        }
+
+        holder.playIcon.setOnClickListener {
+            watchClickListener.onClickPlay(movie)
         }
 
         progressBar.progress = movie.progress
@@ -86,5 +92,8 @@ class MovieListRecyclerViewAdapter(private val context: Context, private val cli
         val title: TextView = itemView.movieTitleTextView
         val description: TextView = itemView.movieDescriptionTextView
         val imageView: ImageView = itemView.movieIconImageView
+        val favoriteButton: ToggleButton = itemView.button_favorite
+        val progressBar: ProgressBar = itemView.movieProgressBar
+        val playIcon: ImageView = itemView.playButton
     }
 }
