@@ -1,7 +1,7 @@
 package com.mayarafernandes.movieplayer
 
 import android.app.Application
-import com.mayarafernandes.movieplayer.movieList.favorites.repository.MovieRoomDatabase
+import com.mayarafernandes.movieplayer.navigationBar.favorites.repository.MovieRoomDatabase
 
 class MoviePlayerApplication: Application() {
 

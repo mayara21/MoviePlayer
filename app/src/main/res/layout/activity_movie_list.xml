@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".movieList.view.MovieListActivity">
+        tools:context="com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView

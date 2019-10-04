@@ -1,9 +1,12 @@
 package com.mayarafernandes.movieplayer
 
-import com.mayarafernandes.movieplayer.movieList.repository.Content
-import com.mayarafernandes.movieplayer.movieList.repository.Movie
-import com.mayarafernandes.movieplayer.movieList.repository.storage.LocalMovieStorage
-import com.mayarafernandes.movieplayer.movieList.view.MovieViewModel
+import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepositoryImpl
+import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.LocalProgressStorage
+import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.ProgressModel
+import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Content
+import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
+import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.LocalMovieStorage
+import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieViewModel
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
@@ -14,7 +17,11 @@ class KeepWatchingRepositoryImplTest {
 
     private val memoryRepository = mock<LocalMovieStorage>()
     private val localStorage = mock<LocalProgressStorage>()
-    private val repository = KeepWatchingRepositoryImpl(localStorage, memoryRepository)
+    private val repository =
+        KeepWatchingRepositoryImpl(
+            localStorage,
+            memoryRepository
+        )
     private val movie = setMovieViewModel()
 
     @Test
@@ -25,7 +32,12 @@ class KeepWatchingRepositoryImplTest {
         whenever(memoryRepository.returnMovieList()).thenReturn(setMovieList())
         repository.saveProgress(movie, watched)
 
-        verify(localStorage).saveProgress(ProgressModel(movie.id, expectedProgress))
+        verify(localStorage).saveProgress(
+            ProgressModel(
+                movie.id,
+                expectedProgress
+            )
+        )
     }
 
     @Test
