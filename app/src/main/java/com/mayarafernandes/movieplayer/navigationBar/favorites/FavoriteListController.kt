@@ -1,11 +1,11 @@
 package com.mayarafernandes.movieplayer.navigationBar.favorites
 
+import com.mayarafernandes.movieplayer.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.LocalMovieStorage
-import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListView
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieViewModel
 import java.util.concurrent.Executors
@@ -71,13 +71,13 @@ class FavoriteListController(
                 if (selected != null) movie.progress = selected.progress
             }
 
-            view.setViewModel(getWatchingList(viewModels))
+            view.setViewModel(getFavoritesList(viewModels))
             view.hideProgressBar()
         }
     }
 
-    private fun getWatchingList(viewModels: List<MovieViewModel>): List<MovieViewModel> {
-        return viewModels.filter { it.progress in 10..90 }
+    private fun getFavoritesList(viewModels: List<MovieViewModel>): List<MovieViewModel> {
+        return viewModels.filter { it.isFavorite }
     }
 
     private fun getSelectedMovie(movie: MovieViewModel): Movie {

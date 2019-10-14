@@ -30,7 +30,7 @@ class FavoriteListFragment : Fragment(), MovieListView, MovieViewModelClickListe
 
     private lateinit var fragmentContext: Context
     private lateinit var controller: FavoriteListController
-    private lateinit var presenter: MovieListPresenterImpl
+    private lateinit var presenter: MovieListPresenter
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
     private lateinit var progressDao: ProgressDao

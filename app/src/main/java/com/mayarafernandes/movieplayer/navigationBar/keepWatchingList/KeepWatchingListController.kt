@@ -1,11 +1,11 @@
 package com.mayarafernandes.movieplayer.navigationBar.keepWatchingList
 
+import com.mayarafernandes.movieplayer.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.LocalMovieStorage
-import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListView
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieViewModel
 import java.util.concurrent.Executors
@@ -73,7 +73,7 @@ class KeepWatchingListController(
 
     private fun getSelectedMovie(movie: MovieViewModel): Movie {
         val movieId = movie.id
-        return localMovieStorage.getMovieById(movieId)
+        return movieRepository.onMovieSelected(movieId)
     }
 
 }

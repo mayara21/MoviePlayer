@@ -48,6 +48,7 @@ class WatchingListRecyclerViewAdapter(private val context: Context, private val 
             watchClickListener.onClickPlay(movie)
         }
 
+
         holder.progressBar.progress = movie.progress
         holder.progressText.text = "${movie.progress}%"
 

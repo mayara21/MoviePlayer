@@ -1,13 +1,14 @@
 package com.mayarafernandes.movieplayer.navigationBar
 
+import com.mayarafernandes.movieplayer.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.favorites.FavoritesRepository
+import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.ProgressModel
 import com.mayarafernandes.movieplayer.navigationBar.movies.MovieListController
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.LocalMovieStorage
-import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListView
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieViewModel
 import com.nhaarman.mockito_kotlin.*
@@ -39,7 +40,7 @@ class MovieListControllerTest {
         whenever(movieRepository.onMovieSelected(movieId)).thenReturn(setExpectedSelectedMovie())
         controller.addToFavorites(movie)
 
-        verify(favoritesRepository).saveFavorite(setExpectedSelectedMovie())
+        verify(favoritesRepository, timeout(70)).saveFavorite(setExpectedSelectedMovie())
     }
 
     @Test
@@ -80,63 +81,142 @@ class MovieListControllerTest {
         )
 
         controller.saveProgress(movie, watched)
-        verify(keepWatchingRepository).saveProgress(movie, watched)
+        verify(keepWatchingRepository, timeout(70)).saveProgress(movie, watched)
+    }
+
+    @Test
+    fun `test when call onSelectMovie expect call getMovieById`() {
+        val movie = MovieViewModel("test", "", "", "test123", false, 0)
+        controller.onSelectMovie(movie)
+        verify(movieRepository).onMovieSelected("test123")
     }
 
     @Test
     fun `test when call onViewCreated expect showProgressBar`() {
         controller.onViewCreated()
-
         verify(view).showProgressBar()
     }
 
     @Test
-    fun `test when call onViewCreated expect call returnMovieList when success or fail`() {
+    fun `test when call onViewCreated expect returnMovieList from Storage`() {
+        controller.onViewCreated()
+        verify(localMovieStorage).returnMovieList()
+    }
+
+    @Test
+    fun `test when call onViewCreated expect call returnMovieList when return list is empty`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
         controller.onViewCreated()
         verify(movieRepository, times(1)).returnMovieList(any())
     }
 
     @Test
-    fun `test when call onViewCreated expect call returnFavorites when success`() {
-        setCallbackSuccess()
+    fun `test when call onViewCreated expect call returnFavorites when storage list not empty`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(setFavorites())
         controller.onViewCreated()
         verify(favoritesRepository, timeout(70)).returnFavorites()
     }
 
     @Test
-    fun `test when call onViewCreated expect call convertModel when success`() {
-        setCallbackSuccess()
+    fun `test when call onViewCreated expect call returnKeepWatching list when storage list not empty`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(setFavorites())
         controller.onViewCreated()
-        verify(presenter).convertModel(setExpectedSelectedMovie())
+        verify(keepWatchingRepository, timeout(70)).returnKeepWatchingList()
     }
 
     @Test
-    fun `test when call onViewCreated expect call setViewModel when success`() {
-        setCallbackSuccess()
+    fun `test when call onViewCreated expect call convertModel when storage list not empty`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(setMovies())
+        controller.onViewCreated()
+        verify(presenter).convertModel(setMovies()[0])
+    }
+
+    @Test
+    fun `test when call onViewCreated expect call setViewModel when storage list not empty`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(setFavorites())
         controller.onViewCreated()
         verify(view, timeout(70)).setViewModel(any())
     }
 
     @Test
-    fun `test when call onViewCreated expect correct argument for setViewModel when success`() {
-        setCallbackSuccess()
+    fun `test when call onViewCreated expect correct argument for view setViewModel when storage list not empty`() {
+        val movies = setMovies()
+        whenever(localMovieStorage.returnMovieList()).thenReturn(movies)
 
-        whenever(presenter.convertModel(any())).thenReturn(setMovieViewModels()[1])
+        whenever(presenter.convertModel(movies[0])).thenReturn(setMovieViewModels()[0])
+        whenever(presenter.convertModel(movies[1])).thenReturn(setMovieViewModels()[1])
         whenever(favoritesRepository.returnFavorites()).thenReturn(setFavorites())
+        whenever(keepWatchingRepository.returnKeepWatchingList()).thenReturn(setWatching())
 
         controller.onViewCreated()
         verify(view, timeout(70)).setViewModel(setExpectedViewModels())
     }
 
     @Test
-    fun `test when call onViewCreated expect call hideProgressBar when success`() {
-        setCallbackSuccess()
+    fun `test when call onViewCreated expect call hideProgressBar when storage list not empty`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(setFavorites())
         controller.onViewCreated()
-        verify(view).hideProgressBar()
+        verify(view, timeout(70)).hideProgressBar()
     }
 
     @Test
-    fun `test when call onViewCreated expect hideProgressBar when fail`() {
+    fun `test when call onViewCreated expect call returnFavorites when storage list empty and success`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
+        setCallbackSuccess()
+        controller.onViewCreated()
+        verify(favoritesRepository, timeout(70)).returnFavorites()
+    }
+
+    @Test
+    fun `test when call onViewCreated expect call returnKeepWatching list when storage list empty and success`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
+        setCallbackSuccess()
+        controller.onViewCreated()
+        verify(keepWatchingRepository, timeout(70)).returnKeepWatchingList()
+    }
+
+    @Test
+    fun `test when call onViewCreated expect call convertModel when storage list empty and success`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
+        setCallbackSuccess()
+        controller.onViewCreated()
+        verify(presenter).convertModel(setExpectedSelectedMovie())
+    }
+
+    @Test
+    fun `test when call onViewCreated expect call setViewModel when storage list empty and success`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
+        setCallbackSuccess()
+        controller.onViewCreated()
+        verify(view, timeout(70)).setViewModel(any())
+    }
+
+    @Test
+    fun `test when call onViewCreated expect correct argument for view setViewModel when storage list empty and success`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
+        setCallbackSuccess()
+        val movies = setMovies()
+
+        whenever(presenter.convertModel(movies[0])).thenReturn(setMovieViewModels()[0])
+        whenever(presenter.convertModel(movies[1])).thenReturn(setMovieViewModels()[1])
+        whenever(favoritesRepository.returnFavorites()).thenReturn(setFavorites())
+        whenever(keepWatchingRepository.returnKeepWatchingList()).thenReturn(setWatching())
+
+        controller.onViewCreated()
+        verify(view, timeout(70)).setViewModel(setExpectedViewModels())
+    }
+
+    @Test
+    fun `test when call onViewCreated expect call hideProgressBar when storage list empty and success`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
+        setCallbackSuccess()
+        controller.onViewCreated()
+        verify(view, timeout(70)).hideProgressBar()
+    }
+
+    @Test
+    fun `test when call onViewCreated expect hideProgressBar when storage list empty and fail`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
         setCallbackError()
         controller.onViewCreated()
         verify(view).hideProgressBar()
@@ -144,13 +224,14 @@ class MovieListControllerTest {
 
     @Test
     fun `test when call onViewCreated expect hideMovieList when fail`() {
+        whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
         setCallbackError()
         controller.onViewCreated()
         verify(view).hideMovieList()
     }
 
     private fun setCallbackSuccess() {
-        val movies = listOf(setExpectedSelectedMovie())
+        val movies = setMovies()
 
         doAnswer {
             val callback = it.arguments[0] as MovieCallbacks
@@ -166,6 +247,38 @@ class MovieListControllerTest {
             return@doAnswer null
         }.whenever(movieRepository).returnMovieList(any())
     }
+
+    private fun setMovies() = listOf(
+        Movie(
+            "test",
+            "description",
+            "type",
+            0.0,
+            0.0,
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            "test123",
+            false
+        ),
+        Movie(
+            "test",
+            "description",
+            "type",
+            0.0,
+            0.0,
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            emptyList(),
+            "test456",
+            true
+        ))
 
     private fun setMovieViewModels() = listOf(
         MovieViewModel(
@@ -227,7 +340,21 @@ class MovieListControllerTest {
 
     private fun setFavorites() = listOf(setExpectSelectedMovieFavorite())
 
-    private fun setExpectedViewModels() = listOf(MovieViewModel(
+    private fun setWatching() = listOf(ProgressModel(
+        "test123",
+        50
+    ))
+
+    private fun setExpectedViewModels() = listOf(
+        MovieViewModel(
+            "test",
+            "description",
+            "url",
+            "test123",
+            false,
+            50
+        ),
+        MovieViewModel(
         "test",
         "description",
         "",

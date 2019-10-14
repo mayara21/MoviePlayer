@@ -1,12 +1,12 @@
 package com.mayarafernandes.movieplayer.navigationBar.movies
 
+import com.mayarafernandes.movieplayer.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.LocalMovieStorage
-import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListView
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieViewModel
 import java.util.concurrent.Executors
@@ -44,7 +44,7 @@ class MovieListController(
     }
 
     fun onSelectMovie(movie: MovieViewModel) {
-        val selectedMovie = getSelectedMovie((movie))
+        val selectedMovie = getSelectedMovie(movie)
     }
 
     fun addToFavorites(movie: MovieViewModel) {
@@ -64,16 +64,13 @@ class MovieListController(
     }
 
     private fun setViewModel(movies: List<Movie>) {
-        var viewModels: List<MovieViewModel>
-
-        viewModels = movies.map { movie ->
+        val viewModels= movies.map { movie ->
             presenter.convertModel(movie)
         }
 
         Executors.newSingleThreadExecutor().execute {
             val favorites = favoritesRepository.returnFavorites()
             val watchingList = keepWatchingRepository.returnKeepWatchingList()
-
             viewModels.map { movie ->
                 if (favorites.find { it.id == movie.id } != null) movie.isFavorite = true
                 val selected = watchingList.find { it.id == movie.id }
