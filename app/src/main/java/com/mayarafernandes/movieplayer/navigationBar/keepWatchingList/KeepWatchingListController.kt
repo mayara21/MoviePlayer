@@ -55,6 +55,8 @@ class KeepWatchingListController(
             presenter.convertModel(movie)
         }
 
+        val finalList = mutableListOf<MovieViewModel>()
+
         Executors.newSingleThreadExecutor().execute {
             val watchingList = keepWatchingRepository.returnKeepWatchingList()
             viewModels.map { movie ->
@@ -62,14 +64,20 @@ class KeepWatchingListController(
                 if (selected != null) movie.progress = selected.progress
             }
 
-            view.setViewModel(getWatchingList(viewModels))
+            for(movie in viewModels) {
+                if (movie.progress in 10..90) {
+                    finalList.add(movie)
+                }
+            }
+
+            view.setViewModel(finalList)
             view.hideProgressBar()
         }
     }
 
-    private fun getWatchingList(viewModels: List<MovieViewModel>): List<MovieViewModel> {
+    /*private fun getWatchingList(viewModels: List<MovieViewModel>): List<MovieViewModel> {
         return viewModels.filter { it.progress in 10..90 }
-    }
+    }*/
 
     private fun getSelectedMovie(movie: MovieViewModel): Movie {
         val movieId = movie.id

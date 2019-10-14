@@ -99,6 +99,7 @@ class KeepWatchingListControllerTest {
     fun `test when call onViewCreated expect call convertModel when storage list empty and success`() {
         whenever(localMovieStorage.returnMovieList()).thenReturn(emptyList())
         setCallbackSuccess()
+        setPresenterBehaviour()
         controller.onViewCreated()
         verify(presenter).convertModel(setExpectedSelectedMovie())
     }
