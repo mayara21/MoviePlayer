@@ -1,6 +1,6 @@
 package com.mayarafernandes.movieplayer.navigationBar
 
-import com.mayarafernandes.movieplayer.MovieListPresenter
+import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.ProgressModel

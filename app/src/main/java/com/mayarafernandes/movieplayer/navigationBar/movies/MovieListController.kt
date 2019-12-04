@@ -1,12 +1,13 @@
 package com.mayarafernandes.movieplayer.navigationBar.movies
 
-import com.mayarafernandes.movieplayer.MovieListPresenter
+import com.mayarafernandes.movieplayer.Navigator
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieCallbacks
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.LocalMovieStorage
+import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListView
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieViewModel
 import java.util.concurrent.Executors
@@ -17,7 +18,8 @@ class MovieListController(
     private val view: MovieListView,
     private val favoritesRepository: FavoritesRepository,
     private val keepWatchingRepository: KeepWatchingRepository,
-    private val localMovieStorage: LocalMovieStorage
+    private val localMovieStorage: LocalMovieStorage,
+    private val navigator: Navigator
 ) {
 
     fun onViewCreated() {
@@ -45,6 +47,7 @@ class MovieListController(
 
     fun onSelectMovie(movie: MovieViewModel) {
         val selectedMovie = getSelectedMovie(movie)
+        navigator.goToSelectedMovie()
     }
 
     fun addToFavorites(movie: MovieViewModel) {

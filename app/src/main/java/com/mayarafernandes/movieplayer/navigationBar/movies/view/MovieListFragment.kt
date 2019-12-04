@@ -34,6 +34,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
     private lateinit var progressBar: ProgressBar
     private lateinit var movieDao: MovieDao
     private lateinit var progressDao: ProgressDao
+    private lateinit var navigator: Navigator
 
     override fun onAttach(context: Context) {
         fragmentContext = context
@@ -70,6 +71,8 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
                 memoryRepository
             )
 
+        navigator = this.activity?.let { Navigator(it) }!! //nao deixar assim
+
         presenter = MovieListPresenterImpl()
         controller = MovieListController(
             movieRepository,
@@ -77,7 +80,8 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
             this,
             favoritesRepository,
             keepWatchingRepository,
-            memoryRepository
+            memoryRepository,
+            navigator
         )
 
         val layoutManager = LinearLayoutManager(activity)

@@ -16,6 +16,7 @@ import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.ProgressDao
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.RoomProgressStorage
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.WatchClickListener
+import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepositoryImpl
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieServiceIMPL
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.MemoryRepository

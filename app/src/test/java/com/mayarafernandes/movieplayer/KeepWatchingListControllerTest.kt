@@ -3,6 +3,7 @@ package com.mayarafernandes.movieplayer
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.KeepWatchingListController
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.ProgressModel
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
+import com.mayarafernandes.movieplayer.navigationBar.movies.view.MovieListPresenter
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieCallbacks

@@ -12,24 +12,26 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+            android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
+
+        <activity android:name=".MovieActivity"
+                  android:parentActivityName=".navigationBar.BottomNavigationActivity">
+            <meta-data
+                  android:name="android.support.PARENT_ACTIVITY"
+                  android:value=".navigationBar.BottomNavigationActivity"/>
+        </activity>
 
         <activity android:name=".navigationBar.BottomNavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-
-        <activity android:name=".splash.SplashActivity">
-
-        </activity>
-
+        <activity android:name=".splash.SplashActivity"/>
         <activity android:name=".login.view.LoginActivity" />
-
     </application>
 
 </manifest>
