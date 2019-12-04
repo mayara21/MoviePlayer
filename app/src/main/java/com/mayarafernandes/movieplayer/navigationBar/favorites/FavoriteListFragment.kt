@@ -20,7 +20,6 @@ import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepo
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieServiceIMPL
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.MemoryRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.view.*
-import kotlinx.android.synthetic.main.activity_movie_list.noConnectionText
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 import kotlinx.android.synthetic.main.fragment_favorite_list.view.*
 

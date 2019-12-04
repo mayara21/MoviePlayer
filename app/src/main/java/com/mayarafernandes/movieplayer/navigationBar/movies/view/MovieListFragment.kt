@@ -21,7 +21,7 @@ import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.WatchClick
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.MovieRepositoryImpl
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.service.MovieServiceIMPL
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.storage.MemoryRepository
-import kotlinx.android.synthetic.main.activity_movie_list.*
+import kotlinx.android.synthetic.main.fragment_movie_list.*
 import kotlinx.android.synthetic.main.fragment_movie_list.view.*
 
 class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener,

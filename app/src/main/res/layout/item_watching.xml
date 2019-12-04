@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="133dp">
+            android:layout_height="match_parent">
 
         <ImageView
                 android:id="@+id/movieIconImageView"
@@ -53,12 +53,12 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="@+id/movieIconImageView"
                 app:layout_constraintEnd_toEndOf="@+id/movieIconImageView"
                 app:layout_constraintStart_toStartOf="@+id/movieIconImageView"
                 app:layout_constraintTop_toTopOf="@+id/movieIconImageView"
-                app:srcCompat="@drawable/ic_play_circle_filled_black_24dp"
-                android:contentDescription="TODO" />
+                app:srcCompat="@drawable/ic_play_circle_filled_black_24dp" />
 
         <ProgressBar
                 android:id="@+id/movieProgressBar"
