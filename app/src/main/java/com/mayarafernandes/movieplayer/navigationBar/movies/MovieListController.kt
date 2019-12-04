@@ -1,6 +1,7 @@
 package com.mayarafernandes.movieplayer.navigationBar.movies
 
 import com.mayarafernandes.movieplayer.Navigator
+import com.mayarafernandes.movieplayer.PlayerMediaModel
 import com.mayarafernandes.movieplayer.navigationBar.keepWatchingList.repository.KeepWatchingRepository
 import com.mayarafernandes.movieplayer.navigationBar.favorites.FavoritesRepository
 import com.mayarafernandes.movieplayer.navigationBar.movies.repository.Movie
@@ -47,7 +48,18 @@ class MovieListController(
 
     fun onSelectMovie(movie: MovieViewModel) {
         val selectedMovie = getSelectedMovie(movie)
-        navigator.goToSelectedMovie()
+        val content = selectedMovie.contents.find { it.format == "mp4" }
+
+        val playableMovie =
+            PlayerMediaModel(
+                selectedMovie.id,
+                selectedMovie.title,
+                selectedMovie.description,
+                content!!.url,
+                content.duration,
+                content.id
+                )
+        navigator.goToSelectedMovie(playableMovie)
     }
 
     fun addToFavorites(movie: MovieViewModel) {

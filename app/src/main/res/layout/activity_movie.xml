@@ -24,35 +24,31 @@
         app:layout_constraintRight_toRightOf="@id/player_container"
         app:layout_constraintTop_toTopOf="@id/player_container"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+    <TextView
+            android:id="@+id/movie_title_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/player_container"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="16dp"
+            android:fontFamily="sans-serif"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="TITLE" />
 
-        <TextView
-                android:id="@+id/movie_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="16dp"
-                android:text="TITULO"
-                android:textColor="#000000"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
-
-        <TextView
-                android:id="@+id/movie_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Description"
-                app:layout_constraintTop_toBottomOf="@id/movie_title"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+    <TextView
+            android:id="@+id/movie_description_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="16dp"
+            android:text="DESCRIPTION"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movie_title_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

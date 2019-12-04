@@ -71,7 +71,7 @@ class MovieListFragment : Fragment(), MovieListView, MovieViewModelClickListener
                 memoryRepository
             )
 
-        navigator = this.activity?.let { Navigator(it) }!! //nao deixar assim
+        navigator = this.activity?.let { Navigator(it) }!! //nao deixar assim!!!
 
         presenter = MovieListPresenterImpl()
         controller = MovieListController(
